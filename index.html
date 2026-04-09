@@ -1,1074 +1,839 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DistroHuman — Real Humans. Real Distribution. Real Growth.</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --ink:#0f0e0c;
-  --ink2:#1e1d1a;
-  --paper:#faf8f3;
-  --cream:#f0ece2;
-  --warm:#e2ddd3;
-  --muted:#9e9a92;
-  --dim:#c4bfb5;
-  --fire:#e8410a;
-  --fire2:#ff6b35;
-  --gold:#f5a623;
-  --green:#16a34a;
-  --blue:#2563eb;
-  --border:#e5e0d6;
-  --white:#ffffff;
-}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--paper);
-  color:var(--ink);
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-size:16px;
-  line-height:1.6;
-  overflow-x:hidden;
-}
-a{text-decoration:none;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Get customers from Reddit & X — done for you | DistroX</title>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* -------------------- RESET & VARIABLES -------------------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* ── CURSOR ── */
-body{cursor:none;}
-#cursor{
-  position:fixed;width:12px;height:12px;
-  background:var(--fire);border-radius:50%;
-  pointer-events:none;z-index:99999;
-  transform:translate(-50%,-50%);
-  transition:transform 0.1s ease, width 0.2s, height 0.2s, background 0.2s;
-  mix-blend-mode:multiply;
-}
-#cursor.big{width:40px;height:40px;background:rgba(232,65,10,0.15);}
+    :root {
+      --ink: #0B0C10;
+      --paper: #FCFAF7;
+      --surface: #FFFFFF;
+      --accent: #F25C32;
+      --accent-glow: rgba(242, 92, 50, 0.18);
+      --accent-soft: #FF7A4A;
+      --muted: #5E5D5A;
+      --border-light: rgba(11, 12, 16, 0.06);
+      --border-medium: rgba(11, 12, 16, 0.1);
+      --shadow-sm: 0 10px 30px -8px rgba(0, 0, 0, 0.04), 0 4px 10px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 24px 44px -12px rgba(0, 0, 0, 0.12);
+      --radius-card: 28px;
+      --radius-element: 60px;
+      --font-heading: 'Manrope', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
 
-/* ── NAV ── */
-nav{
-  position:sticky;top:0;z-index:200;
-  background:rgba(250,248,243,0.94);
-  backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;
-  justify-content:space-between;
-  padding:0 56px;height:64px;
-}
-.logo{
-  font-family:'Instrument Serif',serif;
-  font-size:20px;color:var(--ink);
-  display:flex;align-items:center;gap:8px;
-}
-.logo .dot{color:var(--fire);}
-.logo-sub{font-size:11px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;font-family:'Bricolage Grotesque',sans-serif;}
-.nav-r{display:flex;align-items:center;gap:28px;}
-.nav-r a{font-size:14px;color:var(--muted);font-weight:500;transition:color .2s;}
-.nav-r a:hover{color:var(--ink);}
-.nav-btn{
-  background:var(--ink);color:var(--white);
-  border:none;border-radius:8px;padding:10px 22px;
-  font-size:14px;font-family:'Bricolage Grotesque',sans-serif;
-  font-weight:700;cursor:none;transition:all .2s;
-  display:inline-block;letter-spacing:-.2px;
-}
-.nav-btn:hover{background:var(--fire);}
+    html {
+      scroll-behavior: smooth;
+    }
 
-/* ── HERO ── */
-.hero{
-  min-height:92vh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:80px 56px 60px;
-  position:relative;overflow:hidden;
-  border-bottom:1px solid var(--border);
-}
-.hero-bg{
-  position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 60% 50% at 85% 20%, rgba(232,65,10,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(245,166,35,0.05) 0%, transparent 70%);
-}
-/* Big decorative number */
-.hero-deco{
-  position:absolute;right:-40px;top:50%;transform:translateY(-50%);
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(300px,30vw,520px);
-  color:rgba(0,0,0,0.025);
-  font-style:italic;line-height:1;
-  pointer-events:none;user-select:none;
-  letter-spacing:-10px;
-}
+    body {
+      font-family: var(--font-body);
+      background-color: var(--paper);
+      color: var(--ink);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-.hero-tag{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--white);
-  border:1px solid var(--border);
-  border-radius:100px;padding:6px 18px;
-  font-size:12px;font-weight:700;
-  color:var(--fire);letter-spacing:1px;
-  text-transform:uppercase;
-  margin-bottom:40px;
-  width:fit-content;
-  animation:fadeUp .5s ease both;
-}
-.blink{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--fire);animation:blinker 1.5s step-end infinite;}
-@keyframes blinker{50%{opacity:0;}}
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
 
-.hero h1{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(54px,7.5vw,100px);
-  line-height:.97;letter-spacing:-3px;
-  max-width:900px;margin-bottom:32px;
-  animation:fadeUp .5s .08s ease both;
-}
-.hero h1 .line2{display:block;color:var(--fire);font-style:italic;}
-.hero h1 .line3{display:block;color:var(--muted);}
+    @media (min-width: 768px) {
+      .container { padding: 0 2.5rem; }
+    }
 
-.hero-desc{
-  font-size:18px;color:var(--muted);
-  max-width:560px;line-height:1.75;
-  margin-bottom:52px;font-weight:400;
-  animation:fadeUp .5s .16s ease both;
-}
-.hero-desc strong{color:var(--ink);font-weight:600;}
+    /* -------------------- TYPOGRAPHY -------------------- */
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
 
-.hero-actions{
-  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-  animation:fadeUp .5s .22s ease both;
-}
-.btn-fire{
-  background:var(--fire);color:var(--white);
-  border:none;border-radius:10px;padding:18px 36px;
-  font-size:16px;font-family:'Bricolage Grotesque',sans-serif;
-  font-weight:800;cursor:none;transition:all .2s;
-  letter-spacing:-.3px;display:inline-block;
-}
-.btn-fire:hover{background:#c73208;transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,65,10,0.35);}
-.btn-ghost{
-  background:transparent;color:var(--ink);
-  border:2px solid var(--border);border-radius:10px;
-  padding:16px 28px;font-size:15px;
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-weight:600;cursor:none;transition:all .2s;display:inline-block;
-}
-.btn-ghost:hover{border-color:var(--ink);}
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 1.5rem;
+    }
 
-.hero-proof{
-  display:flex;align-items:center;gap:20px;
-  margin-top:28px;flex-wrap:wrap;
-  animation:fadeUp .5s .28s ease both;
-}
-.proof-item{
-  display:flex;align-items:center;gap:7px;
-  font-size:13px;color:var(--muted);font-weight:500;
-}
-.proof-item .check{color:var(--green);font-size:15px;}
-.proof-sep{width:4px;height:4px;border-radius:50%;background:var(--dim);}
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      background: rgba(242, 92, 50, 0.06);
+      padding: 0.35rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid rgba(242, 92, 50, 0.1);
+    }
 
-/* ── RESULTS SECTION ── */
-.results{
-  padding:100px 56px;
-  background:var(--ink);
-  border-bottom:1px solid var(--ink2);
-  position:relative;overflow:hidden;
-}
-.results::before{
-  content:'';position:absolute;
-  top:-100px;left:50%;transform:translateX(-50%);
-  width:800px;height:400px;
-  background:radial-gradient(ellipse, rgba(232,65,10,0.15) 0%, transparent 70%);
-  pointer-events:none;
-}
-.results-eyebrow{
-  font-size:11px;letter-spacing:3px;text-transform:uppercase;
-  color:var(--fire);font-weight:700;margin-bottom:16px;
-}
-.results h2{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(38px,5vw,62px);
-  color:var(--white);letter-spacing:-2px;
-  line-height:1.05;margin-bottom:16px;
-}
-.results h2 em{font-style:italic;color:var(--fire2);}
-.results-sub{
-  font-size:16px;color:rgba(255,255,255,.4);
-  max-width:520px;margin-bottom:72px;line-height:1.7;
-}
+    /* -------------------- BUTTONS -------------------- */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 1.8rem;
+      border-radius: var(--radius-element);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 8px 20px var(--accent-glow);
+      border: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.95rem;
+    }
 
-.results-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:2px;margin-bottom:2px;
-}
-.results-grid2{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:2px;
-}
-.result-card{
-  background:#161512;
-  padding:40px 36px;
-  position:relative;overflow:hidden;
-  transition:background .2s;
-}
-.result-card:hover{background:#1d1b18;}
-.result-card::after{
-  content:'';position:absolute;
-  top:0;left:0;width:3px;height:0;
-  background:var(--fire);
-  transition:height .3s ease;
-}
-.result-card:hover::after{height:100%;}
-.result-icon{font-size:32px;margin-bottom:20px;}
-.result-val{
-  font-family:'Instrument Serif',serif;
-  font-size:48px;font-weight:400;
-  color:var(--white);letter-spacing:-2px;
-  line-height:1;margin-bottom:8px;
-}
-.result-val .fire{color:var(--fire2);}
-.result-title{font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;}
-.result-desc{font-size:13px;color:rgba(255,255,255,.38);line-height:1.7;}
-.result-tag{
-  display:inline-block;margin-top:16px;
-  font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
-  font-weight:700;padding:4px 10px;border-radius:4px;
-  background:rgba(232,65,10,.12);color:var(--fire2);
-  border:1px solid rgba(232,65,10,.2);
-}
+    .btn-primary:hover {
+      background: #e04a1f;
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(242, 92, 50, 0.25);
+    }
 
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1.5px solid var(--border-medium);
+      color: var(--ink);
+      padding: 0.85rem 1.8rem;
+      border-radius: var(--radius-element);
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
 
-/* ── AGENTS SECTION ── */
-.agents{
-  padding:100px 56px;
-  border-bottom:1px solid var(--border);
-}
-.agents-head{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:60px;align-items:end;margin-bottom:64px;
-}
-.agents-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--fire);font-weight:700;margin-bottom:16px;}
-.agents h2{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(36px,4.5vw,56px);
-  letter-spacing:-2px;line-height:1.05;
-}
-.agents-sub{font-size:16px;color:var(--muted);line-height:1.75;max-width:420px;align-self:end;}
+    .btn-outline:hover {
+      border-color: var(--ink);
+      background: rgba(0,0,0,0.02);
+    }
 
-.agent-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
-}
-.agent-card{
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:32px 28px;
-  transition:all .25s;
-  position:relative;overflow:hidden;
-  background:var(--white);
-}
-.agent-card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 20px 60px rgba(0,0,0,.08);
-  border-color:var(--fire);
-}
-.agent-platform{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:24px;
-}
-.agent-logo{font-size:28px;}
-.agent-live{
-  display:flex;align-items:center;gap:5px;
-  font-size:10px;letter-spacing:1px;font-weight:700;
-  color:var(--green);text-transform:uppercase;
-}
-.agent-live::before{
-  content:'';display:inline-block;
-  width:6px;height:6px;border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 6px var(--green);
-  animation:blinker 2s step-end infinite;
-}
-.agent-name{font-size:17px;font-weight:800;margin-bottom:4px;}
-.agent-handle{font-size:12px;color:var(--muted);margin-bottom:20px;font-weight:500;}
-.agent-stats{display:flex;flex-direction:column;gap:8px;}
-.agent-stat{
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--cream);border-radius:8px;
-  padding:8px 12px;
-}
-.agent-stat-label{font-size:11px;color:var(--muted);font-weight:600;}
-.agent-stat-val{font-size:13px;font-weight:800;color:var(--ink);}
-.agent-daily{
-  margin-top:16px;
-  background:var(--ink);color:var(--white);
-  border-radius:10px;padding:12px 16px;
-  font-size:12px;font-weight:700;
-  text-align:center;letter-spacing:.3px;
-}
+    /* -------------------- NAVIGATION (MOBILE FIRST) -------------------- */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: rgba(252, 250, 247, 0.85);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border-light);
+    }
 
-/* ── NUMBERS STRIP ── */
-.numstrip{
-  background:var(--fire);
-  padding:56px;
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:0;border-bottom:1px solid transparent;
-}
-.nscell{
-  text-align:center;
-  padding:24px 20px;
-  border-right:1px solid rgba(255,255,255,.2);
-}
-.nscell:last-child{border-right:none;}
-.nsval{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(42px,5vw,64px);
-  color:var(--white);letter-spacing:-2px;line-height:1;
-  font-style:italic;
-}
-.nslabel{font-size:13px;color:rgba(255,255,255,.65);margin-top:8px;font-weight:600;}
+    .logo {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: -0.03em;
+    }
+    .logo span { color: var(--accent); }
 
-/* ── PRICING ── */
-.pricing{padding:100px 56px;border-bottom:1px solid var(--border);}
-.pricing-eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--fire);font-weight:700;margin-bottom:16px;}
-.pricing h2{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(36px,4.5vw,56px);
-  letter-spacing:-2px;margin-bottom:12px;
-}
-.pricing-sub{font-size:16px;color:var(--muted);margin-bottom:64px;max-width:500px;}
+    .nav-links {
+      display: none;
+      gap: 2rem;
+      align-items: center;
+    }
 
-.pricing-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;margin-bottom:20px;
-}
-/* CARD SHARED */
-.pcard{
-  border-radius:20px;
-  border:1px solid var(--border);
-  padding:40px;
-  transition:all .2s;
-  position:relative;overflow:hidden;
-  background:var(--white);
-}
-.pcard:hover{box-shadow:0 20px 60px rgba(0,0,0,.07);transform:translateY(-2px);}
-.pcard.dark{background:var(--ink);border-color:var(--ink);}
+    .nav-cta {
+      background: var(--ink);
+      color: white;
+      padding: 0.6rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+    }
 
-.pcard-badge{
-  display:inline-block;font-size:10px;
-  letter-spacing:2px;text-transform:uppercase;
-  font-weight:800;padding:5px 14px;border-radius:100px;
-  margin-bottom:24px;
-}
-.pcard-badge.orange{background:rgba(232,65,10,.1);color:var(--fire);}
-.pcard-badge.white{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
-.pcard-badge.dark2{background:var(--cream);color:var(--muted);}
+    @media (min-width: 900px) {
+      nav { padding: 1.2rem 2.5rem; }
+      .nav-links { display: flex; }
+    }
 
-.pcard-name{font-size:22px;font-weight:800;margin-bottom:6px;}
-.pcard.dark .pcard-name{color:var(--white);}
+    /* -------------------- HERO (READABLE FONT, CLEAN) -------------------- */
+    .hero {
+      padding: 2.5rem 0 4rem;
+    }
 
-.pcard-price{
-  font-family:'Instrument Serif',serif;
-  font-size:58px;letter-spacing:-3px;line-height:1;
-  color:var(--ink);margin-bottom:4px;
-}
-.pcard.dark .pcard-price{color:var(--white);}
-.pcard-price sup{font-size:26px;vertical-align:super;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;}
-.pcard-price sub{font-size:16px;vertical-align:baseline;font-family:'Bricolage Grotesque',sans-serif;color:var(--muted);font-weight:500;}
-.pcard.dark .pcard-price sub{color:rgba(255,255,255,.35);}
+    .hero-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
 
-.pcard-desc{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6;}
-.pcard.dark .pcard-desc{color:rgba(255,255,255,.45);}
+    @media (min-width: 1024px) {
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+    }
 
-.pcard-divider{border:none;border-top:1px solid var(--border);margin:24px 0;}
-.pcard.dark .pcard-divider{border-color:rgba(255,255,255,.08);}
+    .hero-badge {
+      background: white;
+      border-radius: 60px;
+      padding: 0.3rem 1.2rem 0.3rem 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-bottom: 1.8rem;
+    }
 
-.pcard-features{list-style:none;margin-bottom:32px;}
-.pcard-features li{
-  display:flex;align-items:flex-start;gap:10px;
-  font-size:14px;padding:6px 0;line-height:1.5;
-}
-.pcard.dark .pcard-features li{color:rgba(255,255,255,.75);}
-.pcard-features li .ck{color:var(--green);font-weight:800;flex-shrink:0;margin-top:1px;}
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: pulse 2.2s infinite;
+    }
 
-.pcard-btn{
-  display:block;width:100%;padding:16px;
-  border-radius:10px;font-size:15px;
-  font-family:'Bricolage Grotesque',sans-serif;
-  font-weight:800;cursor:none;text-align:center;
-  transition:all .2s;letter-spacing:-.2px;border:none;
-}
-.pcard-btn.fire{background:var(--fire);color:var(--white);}
-.pcard-btn.fire:hover{background:#c73208;box-shadow:0 8px 24px rgba(232,65,10,.35);}
-.pcard-btn.light{background:var(--cream);color:var(--ink);}
-.pcard-btn.light:hover{background:var(--warm);}
+    @keyframes pulse { 0%,100%{ opacity:1; transform: scale(1); } 50%{ opacity:0.5; transform: scale(1.2); } }
 
-/* ── CALCULATOR ── */
-.calculator{
-  border:2px solid var(--fire);
-  border-radius:20px;padding:48px;
-  background:var(--paper);
-  position:relative;overflow:hidden;
-}
-.calculator::before{
-  content:'CUSTOM';
-  position:absolute;top:24px;right:28px;
-  font-size:10px;letter-spacing:3px;font-weight:800;
-  color:var(--fire);opacity:.3;
-}
-.calc-head{margin-bottom:36px;}
-.calc-title{font-size:22px;font-weight:800;margin-bottom:6px;}
-.calc-sub{font-size:14px;color:var(--muted);}
+    .hero h1 {
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      line-height: 1.15;
+    }
 
-.calc-body{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+    .hero h1 .highlight {
+      color: var(--accent);
+      background: linear-gradient(120deg, rgba(242,92,50,0.1) 0%, rgba(242,92,50,0) 90%);
+      padding: 0 0.2rem;
+    }
 
-.sliders{display:flex;flex-direction:column;gap:28px;}
-.slider-row label{
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:13px;font-weight:700;margin-bottom:10px;
-  color:var(--ink);
-}
-.slider-row label span{
-  font-family:'Instrument Serif',serif;
-  font-size:22px;letter-spacing:-1px;color:var(--fire);
-}
-input[type=range]{
-  width:100%;-webkit-appearance:none;appearance:none;
-  height:4px;border-radius:4px;
-  background:var(--border);outline:none;
-  cursor:none;
-}
-input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;
-  width:20px;height:20px;border-radius:50%;
-  background:var(--fire);cursor:none;
-  box-shadow:0 2px 8px rgba(232,65,10,.4);
-  transition:transform .15s;
-}
-input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 2rem;
+    }
 
-.calc-result{
-  background:var(--ink);border-radius:16px;
-  padding:36px;
-}
-.calc-result-label{
-  font-size:11px;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(255,255,255,.35);font-weight:700;margin-bottom:12px;
-}
-.calc-price{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(42px,5vw,64px);
-  color:var(--white);letter-spacing:-3px;
-  line-height:1;margin-bottom:4px;
-}
-.calc-price sub{font-size:18px;font-family:'Bricolage Grotesque',sans-serif;letter-spacing:0;color:rgba(255,255,255,.4);}
-.calc-breakdown{
-  margin:20px 0;
-  display:flex;flex-direction:column;gap:8px;
-}
-.calc-row{
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:13px;color:rgba(255,255,255,.45);
-  padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06);
-}
-.calc-row:last-child{border-bottom:none;}
-.calc-row strong{color:rgba(255,255,255,.8);font-weight:700;}
-.calc-daily{
-  background:rgba(232,65,10,.15);border:1px solid rgba(232,65,10,.25);
-  border-radius:10px;padding:14px 16px;margin:16px 0;
-}
-.calc-daily-val{font-size:22px;font-weight:800;color:var(--fire2);font-family:'Instrument Serif',serif;letter-spacing:-1px;}
-.calc-daily-label{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:1px;text-transform:uppercase;}
-.calc-cta-btn{
-  width:100%;padding:14px;background:var(--fire);color:var(--white);
-  border:none;border-radius:10px;font-size:14px;
-  font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
-  cursor:none;margin-top:8px;transition:all .2s;letter-spacing:-.2px;
-}
-.calc-cta-btn:hover{background:#c73208;}
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
 
-/* ── WHY HUMAN ── */
-.why{
-  padding:100px 56px;
-  background:var(--cream);
-  border-bottom:1px solid var(--border);
-}
-.why h2{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(36px,4.5vw,56px);
-  letter-spacing:-2px;margin-bottom:12px;
-}
-.why h2 em{font-style:italic;color:var(--fire);}
-.why-sub{font-size:16px;color:var(--muted);max-width:520px;margin-bottom:64px;}
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      border-top: 1px solid var(--border-light);
+      padding-top: 1.5rem;
+    }
 
-.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.why-card{
-  background:var(--white);border-radius:20px;
-  padding:36px;border:1px solid var(--border);
-  transition:all .2s;
-}
-.why-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.07);}
-.why-icon{font-size:36px;margin-bottom:20px;}
-.why-card h3{font-size:17px;font-weight:800;margin-bottom:10px;}
-.why-card p{font-size:14px;color:var(--muted);line-height:1.75;}
-.why-card .why-num{
-  font-family:'Instrument Serif',serif;
-  font-size:42px;color:var(--fire);
-  letter-spacing:-2px;line-height:1;
-  margin-top:20px;font-style:italic;
-}
+    .stat-item .num {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.8rem;
+    }
+    .stat-item .label { color: var(--muted); font-size: 0.85rem; }
 
-/* ── CTA ── */
-.cta{
-  padding:120px 56px;
-  background:var(--ink);
-  text-align:center;
-  position:relative;overflow:hidden;
-}
-.cta::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 60% at 50% 50%, rgba(232,65,10,.1) 0%, transparent 70%);
-}
-.cta h2{
-  font-family:'Instrument Serif',serif;
-  font-size:clamp(44px,7vw,82px);
-  color:var(--white);letter-spacing:-3px;
-  line-height:1;margin-bottom:24px;
-}
-.cta h2 em{font-style:italic;color:var(--fire2);}
-.cta-p{font-size:17px;color:rgba(255,255,255,.4);max-width:440px;margin:0 auto 52px;line-height:1.7;}
+    /* Hero card (visual message example) */
+    .hero-card {
+      background: var(--surface);
+      border-radius: var(--radius-card);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      width: 100%;
+    }
 
-.cta-form{
-  display:flex;gap:12px;justify-content:center;flex-wrap:wrap;max-width:500px;margin:0 auto;
-}
-.cta-input{
-  flex:1;min-width:240px;
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:10px;padding:16px 20px;
-  font-size:15px;color:var(--white);
-  font-family:'Bricolage Grotesque',sans-serif;
-  outline:none;transition:border-color .2s;
-}
-.cta-input::placeholder{color:rgba(255,255,255,.25);}
-.cta-input:focus{border-color:var(--fire);}
-.cta-note{font-size:12px;color:rgba(255,255,255,.2);margin-top:16px;}
-.cta-note.success{color:#4ade80;}
+    .example-post {
+      background: #F3F1EC;
+      border-radius: 20px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid var(--accent);
+    }
 
-/* ── FOOTER ── */
-footer{
-  background:var(--ink2);
-  border-top:1px solid rgba(255,255,255,.05);
-  padding:36px 56px;
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
-}
-.footer-logo{
-  font-family:'Instrument Serif',serif;
-  font-size:18px;color:var(--white);
-}
-.footer-logo .dot{color:var(--fire);}
-footer p{font-size:12px;color:rgba(255,255,255,.2);}
-.footer-links{display:flex;gap:24px;}
-.footer-links a{font-size:13px;color:rgba(255,255,255,.3);transition:color .2s;}
-.footer-links a:hover{color:rgba(255,255,255,.7);}
+    .post-meta { display: flex; gap: 10px; color: var(--muted); font-size: 0.8rem; margin-bottom: 12px; flex-wrap: wrap; }
+    .post-content { font-weight: 500; font-size: 1rem; }
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
-.reveal.in{opacity:1;transform:none;}
-.reveal-d1{transition-delay:.07s;}
-.reveal-d2{transition-delay:.14s;}
-.reveal-d3{transition-delay:.21s;}
-.reveal-d4{transition-delay:.28s;}
+    .reply-bubble {
+      background: white;
+      border-radius: 20px 20px 20px 6px;
+      padding: 1.2rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+      border: 1px solid var(--border-light);
+    }
 
-/* ── RESPONSIVE ── */
-@media(max-width:1024px){
-  .agent-grid{grid-template-columns:repeat(2,1fr);}
-  .results-grid{grid-template-columns:repeat(2,1fr);}
-}
-@media(max-width:768px){
-  nav,.hero,.results,.agents,.numstrip,.pricing,.why,.cta,footer{padding-left:24px;padding-right:24px;}
-  .nav-r>a{display:none;}
-  .hero h1{font-size:46px;letter-spacing:-2px;}
-  .agents-head{grid-template-columns:1fr;}
-  .agent-grid{grid-template-columns:1fr 1fr;}
-  .numstrip{grid-template-columns:1fr 1fr;}
-  .pricing-grid{grid-template-columns:1fr;}
-  .calc-body{grid-template-columns:1fr;}
-  .why-grid{grid-template-columns:1fr;}
-  .results-grid,.results-grid2{grid-template-columns:1fr;}
-  body{cursor:auto;}
-  #cursor{display:none;}
-}
-</style>
+    .reply-author { display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 10px; }
+    .reply-highlight { background: rgba(242, 92, 50, 0.12); font-weight: 600; padding: 0.1rem 6px; border-radius: 20px; }
+
+    /* -------------------- WHO BANNER -------------------- */
+    .who-banner {
+      background: var(--ink);
+      color: white;
+      border-radius: 40px;
+      padding: 2rem 1.8rem;
+      margin: 1.5rem 0 2.5rem;
+      text-align: center;
+    }
+    .who-banner p {
+      font-size: 1.25rem;
+      font-weight: 500;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .who-banner strong { color: var(--accent-soft); }
+
+    @media (min-width: 640px) {
+      .who-banner { border-radius: 60px; padding: 2.5rem 2.5rem; }
+      .who-banner p { font-size: 1.6rem; }
+    }
+
+    /* -------------------- HOW IT WORKS -------------------- */
+    .steps-visual {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .steps-visual { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .step-card {
+      background: var(--surface);
+      border-radius: 28px;
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border-light);
+      transition: all 0.25s;
+    }
+
+    .step-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(242, 92, 50, 0.06);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      color: var(--accent);
+    }
+
+    .step-card h4 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+    .quote-sample {
+      background: #F7F5F1;
+      padding: 0.9rem 1rem;
+      border-radius: 18px;
+      margin: 1.2rem 0;
+      font-style: italic;
+      font-size: 0.95rem;
+    }
+
+    /* -------------------- ADS SECTION FIX (intent clarity) -------------------- */
+    .compare-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    @media (min-width: 640px) {
+      .compare-grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .card-neutral, .card-good {
+      background: var(--surface);
+      border-radius: 28px;
+      padding: 1.8rem;
+      border: 1px solid var(--border-light);
+    }
+
+    .card-good { background: #EDF7F0; border-color: #b8dbc2; }
+
+    /* -------------------- PRICING (DISCOUNT + TIMER) -------------------- */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+      margin: 2rem 0 1rem;
+    }
+
+    @media (min-width: 900px) {
+      .pricing-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .pricing-card {
+      background: white;
+      border-radius: 32px;
+      padding: 2rem 1.5rem;
+      border: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .pricing-card.featured {
+      background: var(--ink);
+      color: white;
+      border: none;
+    }
+
+    .discount-badge {
+      background: var(--accent);
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .price {
+      font-family: var(--font-heading);
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .price s {
+      font-size: 1.2rem;
+      font-weight: 400;
+      opacity: 0.5;
+      margin-left: 8px;
+    }
+
+    .timer-box {
+      background: rgba(242, 92, 50, 0.1);
+      border-radius: 30px;
+      padding: 0.8rem 1rem;
+      margin: 1.2rem 0;
+      text-align: center;
+      font-weight: 600;
+      border: 1px dashed var(--accent);
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 1.8rem 0;
+    }
+    .feature-list li {
+      padding: 0.5rem 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.9rem;
+    }
+
+    /* -------------------- TABLE -------------------- */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 24px;
+      border: 1px solid var(--border-light);
+      margin: 2rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      min-width: 600px;
+    }
+
+    th, td {
+      padding: 1rem 1.2rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    th {
+      background: var(--ink);
+      color: white;
+      font-weight: 500;
+    }
+
+    /* -------------------- FOOTER (MOBILE RESPONSIVE) -------------------- */
+    footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 2.5rem;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* -------------------- REVEAL ANIMATIONS -------------------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
 
-<div id="cursor"></div>
-
-<!-- NAV -->
+<!-- STICKY NAV -->
 <nav>
-  <div class="logo">
-    Distro<span class="dot">.</span>Human
-    <span class="logo-sub" style="display:none">Agency</span>
-  </div>
-  <div class="nav-r">
-    <a href="#results">Results</a>
-    <a href="#agents">Agents</a>
+  <div class="logo">Distro<span>X</span></div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#example">Example</a>
     <a href="#pricing">Pricing</a>
-    <a href="#cta" class="nav-btn">Start Growing →</a>
+    <a href="#compare">Compare</a>
   </div>
+  <a href="#pricing" class="nav-cta">Get customers →</a>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-deco">H</div>
-
-  <div class="hero-tag">
-    <span class="blink"></span>
-    Human Agents Active Now
-  </div>
-
-  <h1>
-    You build the SaaS.
-    <span class="line2">We get you noticed.</span>
-    <span class="line3">Guaranteed.</span>
-  </h1>
-
-  <p class="hero-desc">
-    Tired of building in silence? We deploy <strong>real human agents</strong> on Twitter, Reddit, LinkedIn & Instagram — every single day — to get your SaaS in front of the founders who need it.
-  </p>
-
-  <div class="hero-actions">
-    <a href="#cta" class="btn-fire">Get My SaaS Distributed →</a>
-    <a href="#results" class="btn-ghost">See Real Results</a>
-  </div>
-
-  <div class="hero-proof">
-    <div class="proof-item"><span class="check">✓</span> Zero AI bots</div>
-    <div class="proof-sep"></div>
-    <div class="proof-item"><span class="check">✓</span> Real humans only</div>
-    <div class="proof-sep"></div>
-    <div class="proof-item"><span class="check">✓</span> SaaS founders targeted</div>
-    <div class="proof-sep"></div>
-    <div class="proof-item"><span class="check">✓</span> From $90/mo</div>
-  </div>
-</section>
-
-<!-- RESULTS -->
-<section class="results" id="results">
-  <div class="results-eyebrow reveal">What you actually get</div>
-  <h2 class="reveal">Forget the process.<br><em>Here are the results.</em></h2>
-  <p class="results-sub reveal">You don't care how we do it. You care what happens to your SaaS. Here's exactly what our clients see.</p>
-
-  <div class="results-grid">
-    <div class="result-card reveal">
-      <div class="result-icon">🔥</div>
-      <div class="result-val"><span class="fire">3–5x</span></div>
-      <div class="result-title">More profile visits in 30 days</div>
-      <div class="result-desc">Consistent daily presence across platforms drives a surge in founders visiting your profile and checking out your product.</div>
-      <span class="result-tag">Avg. result at 30 days</span>
-    </div>
-    <div class="result-card reveal reveal-d1">
-      <div class="result-icon">💬</div>
-      <div class="result-val"><span class="fire">1,200+</span></div>
-      <div class="result-title">Touchpoints with SaaS founders monthly</div>
-      <div class="result-desc">Each agent makes 40+ meaningful interactions daily. That's 1,200+ real conversations with your exact target audience every month.</div>
-      <span class="result-tag">Per month, full plan</span>
-    </div>
-    <div class="result-card reveal reveal-d2">
-      <div class="result-icon">🎯</div>
-      <div class="result-val"><span class="fire">100%</span></div>
-      <div class="result-title">SaaS founder audience only</div>
-      <div class="result-desc">Every comment, DM, and post targets verified SaaS builders, indie hackers, and micro-SaaS founders. Zero wasted reach.</div>
-      <span class="result-tag">Precision targeting</span>
-    </div>
-  </div>
-  <div class="results-grid2" style="margin-top:2px">
-    <div class="result-card reveal">
-      <div class="result-icon">📈</div>
-      <div class="result-val"><span class="fire">60</span></div>
-      <div class="result-title">Days to a real, warm audience</div>
-      <div class="result-desc">At 60 days, you have a community of SaaS founders who know your name, follow your content, and are warm to your product. This is the distribution flywheel most founders never build.</div>
-      <span class="result-tag">Compounding effect</span>
-    </div>
-    <div class="result-card reveal reveal-d1">
-      <div class="result-icon">🤝</div>
-      <div class="result-val"><span class="fire">Real</span></div>
-      <div class="result-title">Conversations, not impressions</div>
-      <div class="result-desc">Our agents don't just like posts. They reply, DM, debate, and engage. Founders remember names they've had real conversations with — that's how brands are built in 2025.</div>
-      <span class="result-tag">Relationship-first</span>
-    </div>
-  </div>
-</section>
-
-<!-- AGENTS -->
-<section class="agents" id="agents">
-  <div class="agents-head">
-    <div>
-      <div class="agents-eyebrow reveal">Your Human Agents</div>
-      <h2 class="reveal">Four platforms.<br>Four dedicated<br>Human Agents.</h2>
-    </div>
-    <p class="agents-sub reveal">Each Human Agent lives on one platform — trained on your product, your voice, and your ideal customer. They show up every day so you don't have to.</p>
-  </div>
-
-  <div class="agent-grid">
-    <!-- Twitter -->
-    <div class="agent-card reveal">
-      <div class="agent-platform">
-        <span class="agent-logo">𝕏</span>
-        <span class="agent-live">Live</span>
-      </div>
-      <div class="agent-name">Twitter / X Agent</div>
-      <div class="agent-handle">Targeting SaaS & indie hacker community</div>
-      <div class="agent-stats">
-        <div class="agent-stat">
-          <span class="agent-stat-label">💬 Replies / day</span>
-          <span class="agent-stat-val">10</span>
+<main>
+  <!-- HERO (CLEAN, READABLE) -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <div class="hero-badge">
+          <span class="badge-dot"></span> 
+          <span>Trusted by 500+ SaaS founders</span>
         </div>
-        <div class="agent-stat">
-          <span class="agent-stat-label">📩 DMs / day</span>
-          <span class="agent-stat-val">10</span>
+        <h1>
+          We turn Reddit & X conversations into <span class="highlight">customers</span> for your SaaS
+        </h1>
+        <p class="hero-desc">
+          We find high-intent posts where people are actively looking for solutions, 
+          then write human replies that naturally recommend your product.
+        </p>
+        <div class="hero-actions">
+          <a href="#pricing" class="btn-primary"><i class="fas fa-arrow-right"></i> Start getting customers</a>
+          <a href="#how" class="btn-outline"><i class="fas fa-play"></i> See how it works</a>
         </div>
-        <div class="agent-stat">
-          <span class="agent-stat-label">✍️ Threads / week</span>
-          <span class="agent-stat-val">2</span>
+        <div class="hero-stats">
+          <div class="stat-item"><span class="num">12K+</span> <span class="label">high-intent convos/mo</span></div>
+          <div class="stat-item"><span class="num">0</span> <span class="label">shadow bans, ever</span></div>
         </div>
       </div>
-      <div class="agent-daily">20 founder touchpoints daily</div>
-    </div>
 
-    <!-- Reddit -->
-    <div class="agent-card reveal reveal-d1">
-      <div class="agent-platform">
-        <span class="agent-logo">🟠</span>
-        <span class="agent-live">Live</span>
-      </div>
-      <div class="agent-name">Reddit Agent</div>
-      <div class="agent-handle">r/SaaS, r/entrepreneur, r/indiehackers + more</div>
-      <div class="agent-stats">
-        <div class="agent-stat">
-          <span class="agent-stat-label">💬 Comments / day</span>
-          <span class="agent-stat-val">10</span>
+      <!-- Visual message card (prominently visible) -->
+      <div class="hero-card reveal">
+        <div class="example-post">
+          <div class="post-meta"><i class="fab fa-reddit-alien"></i> r/SaaS · 2 hours ago</div>
+          <div class="post-content">"Anyone know a tool for automating client invoices? Spreadsheets are killing me."</div>
         </div>
-        <div class="agent-stat">
-          <span class="agent-stat-label">📩 DMs / day</span>
-          <span class="agent-stat-val">10</span>
-        </div>
-        <div class="agent-stat">
-          <span class="agent-stat-label">📝 Posts / week</span>
-          <span class="agent-stat-val">2</span>
-        </div>
-      </div>
-      <div class="agent-daily">20 founder touchpoints daily</div>
-    </div>
-
-
-    <!-- LinkedIn -->
-    <div class="agent-card reveal reveal-d2">
-      <div class="agent-platform">
-        <span class="agent-logo">💼</span>
-        <span class="agent-live">Live</span>
-      </div>
-      <div class="agent-name">LinkedIn Agent</div>
-      <div class="agent-handle">B2B SaaS founders & decision makers</div>
-      <div class="agent-stats">
-        <div class="agent-stat">
-          <span class="agent-stat-label">💬 Comments / day</span>
-          <span class="agent-stat-val">10</span>
-        </div>
-        <div class="agent-stat">
-          <span class="agent-stat-label">📩 Connect DMs / day</span>
-          <span class="agent-stat-val">10</span>
-        </div>
-        <div class="agent-stat">
-          <span class="agent-stat-label">📄 Posts / week</span>
-          <span class="agent-stat-val">2</span>
-        </div>
-      </div>
-      <div class="agent-daily">20 founder touchpoints daily</div>
-    </div>
-
-    <!-- Instagram -->
-    <div class="agent-card reveal reveal-d3">
-      <div class="agent-platform">
-        <span class="agent-logo">📸</span>
-        <span class="agent-live">Live</span>
-      </div>
-      <div class="agent-name">Instagram Agent</div>
-      <div class="agent-handle">SaaS builders, bootstrappers & founders</div>
-      <div class="agent-stats">
-        <div class="agent-stat">
-          <span class="agent-stat-label">💬 Comments / day</span>
-          <span class="agent-stat-val">10</span>
-        </div>
-        <div class="agent-stat">
-          <span class="agent-stat-label">📩 Story / DMs / day</span>
-          <span class="agent-stat-val">10</span>
-        </div>
-        <div class="agent-stat">
-          <span class="agent-stat-label">🎬 Posts / week</span>
-          <span class="agent-stat-val">2</span>
-        </div>
-      </div>
-      <div class="agent-daily">20 founder touchpoints daily</div>
-    </div>
-  </div>
-</section>
-
-<!-- NUMBERS STRIP -->
-<div class="numstrip">
-  <div class="nscell reveal">
-    <div class="nsval">80+</div>
-    <div class="nslabel">Founder touchpoints / day (full plan)</div>
-  </div>
-  <div class="nscell reveal reveal-d1">
-    <div class="nsval">2,400+</div>
-    <div class="nslabel">Real conversations / month</div>
-  </div>
-  <div class="nscell reveal reveal-d2">
-    <div class="nsval">4</div>
-    <div class="nslabel">Platforms covered simultaneously</div>
-  </div>
-  <div class="nscell reveal reveal-d3">
-    <div class="nsval">60d</div>
-    <div class="nslabel">To a warm, engaged SaaS audience</div>
-  </div>
-</div>
-
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="pricing-eyebrow reveal">Pricing</div>
-  <h2 class="reveal">Pay for humans.<br>Not for software.</h2>
-  <p class="pricing-sub reveal">Every plan is a real person showing up for your SaaS every day. Pick the level of distribution you need.</p>
-
-  <div class="pricing-grid">
-    <!-- Single Agent -->
-    <div class="pcard reveal">
-      <span class="pcard-badge dark2">Single Agent</span>
-      <div class="pcard-name">One Platform</div>
-      <div class="pcard-price"><sup>$</sup>90<sub>/mo</sub></div>
-      <p class="pcard-desc">One dedicated Human Agent on any single platform of your choice. Perfect to start and test what works.</p>
-      <hr class="pcard-divider">
-      <ul class="pcard-features">
-        <li><span class="ck">✓</span> 1 Human Agent assigned</li>
-        <li><span class="ck">✓</span> Your choice of platform</li>
-        <li><span class="ck">✓</span> 10 comments or replies/day</li>
-        <li><span class="ck">✓</span> 10 DMs/day to founders</li>
-        <li><span class="ck">✓</span> 2 posts/week</li>
-        <li><span class="ck">✓</span> Weekly activity report</li>
-      </ul>
-      <a href="#cta" class="pcard-btn light">Start with 1 Agent →</a>
-    </div>
-
-    <!-- Complete -->
-    <div class="pcard dark reveal reveal-d1">
-      <span class="pcard-badge orange">⚡ Best Value</span>
-      <div class="pcard-name">Complete Package</div>
-      <div class="pcard-price"><sup>$</sup>249<sub>/mo</sub></div>
-      <p class="pcard-desc">All 4 Human Agents across all 4 platforms. Maximum reach, maximum distribution, minimum effort from you.</p>
-      <hr class="pcard-divider">
-      <ul class="pcard-features">
-        <li><span class="ck">✓</span> 4 Human Agents (one per platform)</li>
-        <li><span class="ck">✓</span> Twitter, Reddit, LinkedIn & Instagram</li>
-        <li><span class="ck">✓</span> 40+ comments & replies/day</li>
-        <li><span class="ck">✓</span> 40+ DMs/day to founders</li>
-        <li><span class="ck">✓</span> 8 posts/week across all platforms</li>
-        <li><span class="ck">✓</span> Weekly activity report</li>
-        <li><span class="ck">✓</span> Monthly strategy call</li>
-        <li><span class="ck">✓</span> Priority agent replacement</li>
-      </ul>
-      <a href="#cta" class="pcard-btn fire">Get All 4 Agents →</a>
-    </div>
-  </div>
-
-  <!-- CALCULATOR -->
-  <div class="calculator reveal" id="calc">
-    <div class="calc-head">
-      <div class="calc-title">⚡ Need Aggressive Distribution?</div>
-      <p class="calc-sub">Slide to build your custom plan. More agents = more daily touchpoints = faster growth.</p>
-    </div>
-    <div class="calc-body">
-      <div class="sliders">
-        <div class="slider-row">
-          <label>Human Agents per Platform <span id="agents-val">2</span></label>
-          <input type="range" min="1" max="4" value="2" id="agents-slider" oninput="updateCalc()">
-          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;">
-            <span>1 agent</span><span>4 agents</span>
+        <div class="reply-bubble">
+          <div class="reply-author">
+            <span style="background: var(--accent); width: 28px; height: 28px; border-radius: 50%; display: inline-block;"></span>
+            <span>YourProduct · 45 min ago</span>
+          </div>
+          <div class="reply-text">
+            I had the exact same problem — ended up using <span class="reply-highlight">[Your SaaS]</span>. 
+            It auto-generates invoices and saved me ~6h/week.
           </div>
         </div>
-        <div class="slider-row">
-          <label>Platforms Active <span id="plat-val">3</span></label>
-          <input type="range" min="1" max="4" value="3" id="plat-slider" oninput="updateCalc()">
-          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;">
-            <span>1 platform</span><span>All 4</span>
-          </div>
+        <p style="margin-top: 1.2rem; font-size: 0.85rem; color: var(--muted);">
+          <i class="fas fa-check-circle" style="color: var(--accent);"></i> Real reply, real results.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO SECTION -->
+  <div class="container reveal">
+    <div class="who-banner">
+      <p>⚡ Built for <strong>indie hackers, SaaS founders, and early-stage startups</strong> who don’t have time for manual outreach.</p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="how">
+    <div class="container">
+      <span class="section-tag reveal">How it works</span>
+      <h2 class="reveal">We find the posts. We write the replies. You get customers.</h2>
+      <div class="steps-visual">
+        <div class="step-card reveal">
+          <div class="step-icon"><i class="fas fa-search"></i></div>
+          <h4>1. We find posts like</h4>
+          <div class="quote-sample">"Looking for a tool to automate invoices"</div>
+          <p>Our system scans Reddit & X 24/7 for high-intent questions and "switch signals".</p>
         </div>
-        <div class="slider-row">
-          <label>Actions per Agent / Day <span id="actions-val">15</span></label>
-          <input type="range" min="10" max="30" value="15" step="5" id="actions-slider" oninput="updateCalc()">
-          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:4px;">
-            <span>10/day (standard)</span><span>30/day (aggressive)</span>
+        <div class="step-card reveal">
+          <div class="step-icon"><i class="fas fa-pen-fancy"></i></div>
+          <h4>2. We reply (human)</h4>
+          <div class="quote-sample">"I had the same problem — this tool helped me..."</div>
+          <p>Real humans craft helpful replies. No bots. Your product mentioned naturally.</p>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+          <h4>3. You get</h4>
+          <ul style="list-style: none; margin-top: 1rem;">
+            <li>→ Clicks from warm audiences</li>
+            <li>→ Signups & trials</li>
+            <li>→ Paying customers</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXAMPLE SECTION -->
+  <section id="example">
+    <div class="container">
+      <div style="background: #F2EFE9; border-radius: 36px; padding: 2rem 1.5rem;" class="reveal">
+        <span class="section-tag" style="background: white;">Real example</span>
+        <h2>This is exactly what we do.</h2>
+        <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+          <div style="background: white; border-radius: 24px; padding: 1.5rem;">
+            <div style="font-weight: 600; margin-bottom: 1rem;"><i class="fab fa-reddit-alien"></i> Reddit post</div>
+            <div style="background: #FAF8F3; padding: 1.2rem; border-radius: 20px;">“Our team wastes 2h/day on manual data entry. Any lightweight automation tools?”</div>
+          </div>
+          <div style="background: white; border-radius: 24px; padding: 1.5rem;">
+            <div style="font-weight: 600; margin-bottom: 1rem;"><i class="fas fa-reply"></i> Our reply</div>
+            <div style="background: #FAF8F3; padding: 1.2rem; border-radius: 20px;">“I totally get this. We switched to <strong>[Client SaaS]</strong> and set up flows in 20 mins.”</div>
+            <p style="margin-top: 1rem;"><i class="fas fa-chart-simple" style="color: var(--accent);"></i> 27 clicks · 9 signups · 2 customers</p>
           </div>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="calc-result">
-        <div class="calc-result-label">Your Custom Plan</div>
-        <div class="calc-price" id="calc-price"><sup>$</sup><span id="calc-price-num">540</span><sub>/mo</sub></div>
-        <div class="calc-breakdown">
-          <div class="calc-row"><span>Total Human Agents</span><strong id="c-agents">6</strong></div>
-          <div class="calc-row"><span>Platforms covered</span><strong id="c-plats">3</strong></div>
-          <div class="calc-row"><span>Daily actions / agent</span><strong id="c-actions">15</strong></div>
+  <!-- WHY IT WORKS (ADS FIXED: high intent ads not 'cold') -->
+  <section>
+    <div class="container">
+      <span class="section-tag reveal">Why this works better</span>
+      <div class="compare-grid-2">
+        <div class="card-neutral reveal">
+          <h3><i class="fas fa-bullhorn"></i> Traditional ads</h3>
+          <p style="margin-top: 1rem;">Can be high intent, but expensive and require constant optimization. You pay for every click.</p>
         </div>
-        <div class="calc-daily">
-          <div class="calc-daily-val" id="c-daily">270</div>
-          <div class="calc-daily-label">Founder touchpoints per day</div>
+        <div class="card-good reveal">
+          <h3><i class="fas fa-comments"></i> Our approach</h3>
+          <p style="margin-top: 1rem;">We insert your product into existing conversations where people <strong>already ask for a solution</strong> — zero ad spend.</p>
         </div>
-        <div style="font-size:12px;color:rgba(255,255,255,.3);margin-bottom:12px;line-height:1.6;" id="c-monthly-txt">That's 8,100+ real conversations with SaaS founders every month.</div>
-        <button class="calc-cta-btn" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Get This Custom Plan →</button>
+      </div>
+
+      <!-- Switch signals -->
+      <div style="background: linear-gradient(145deg, #FFFFFF, #F9F6F1); border-radius: 36px; padding: 2rem 1.5rem; margin: 2rem 0;" class="reveal">
+        <span style="background: var(--accent); color: white; padding: 0.3rem 1.5rem; border-radius: 50px; font-weight: 600;">🔥 SWITCH SIGNALS</span>
+        <h3 style="margin: 1.5rem 0 0.8rem;">We catch complaints about competitors</h3>
+        <p>Find people complaining about your competitors and introduce your product at the perfect moment.</p>
       </div>
     </div>
+  </section>
+
+  <!-- PRICING (WITH 75% DISCOUNT & TIMER) -->
+  <section id="pricing" style="background: #F6F3EE; border-radius: 40px 40px 0 0; margin-top: 2rem; padding: 4rem 0;">
+    <div class="container">
+      <span class="section-tag reveal">Pricing</span>
+      <h2 class="reveal">Done-for-you customer acquisition — 75% off launch special</h2>
+      
+      <!-- LIVE TIMER -->
+      <div class="reveal timer-box" style="max-width: 500px; margin: 1rem 0 2rem; background: white;">
+        <i class="fas fa-hourglass-half" style="color: var(--accent);"></i> 
+        <span>Discount ends May 15, 2026 — </span>
+        <span id="countdown-timer" style="font-weight: 800; font-family: monospace;">--d --h --m --s</span>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- STARTER CARD -->
+        <div class="pricing-card reveal">
+          <span class="discount-badge">75% OFF</span>
+          <h3>Starter</h3>
+          <div class="price">$75 <s>$299</s></div>
+          <p class="muted" style="margin-bottom: 1.2rem;">Perfect for early validation</p>
+          <ul class="feature-list">
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> <strong>30 human-written replies/month</strong></li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> Platforms: X + Reddit</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> High-intent targeting</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> Fully done-for-you</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> Weekly performance report</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> 1 product included</li>
+          </ul>
+          <a href="#" class="btn-primary" style="display: block; text-align: center;">Claim 75% off →</a>
+        </div>
+
+        <!-- GROWTH (FEATURED) -->
+        <div class="pricing-card featured reveal">
+          <span class="discount-badge" style="background: white; color: var(--ink);">75% OFF · MOST POPULAR</span>
+          <h3>Growth</h3>
+          <div class="price">$175 <s>$699</s></div>
+          <p style="margin-bottom: 1.2rem; opacity: 0.9;">For scaling startups</p>
+          <ul class="feature-list">
+            <li><i class="fas fa-check"></i> <strong>60 human-written replies/month</strong></li>
+            <li><i class="fas fa-check"></i> <strong>30 posts/month</strong> (extra visibility)</li>
+            <li><i class="fas fa-check"></i> Platforms: X + Reddit</li>
+            <li><i class="fas fa-check"></i> Dedicated account manager</li>
+            <li><i class="fas fa-check"></i> Switch signal monitoring</li>
+            <li><i class="fas fa-check"></i> Faster reply turnaround</li>
+            <li><i class="fas fa-check"></i> Competitor tracking</li>
+            <li><i class="fas fa-check"></i> Up to 2 products</li>
+          </ul>
+          <a href="#" class="btn-primary" style="background: white; color: var(--ink); display: block; text-align: center;">Get Growth →</a>
+        </div>
+
+        <!-- SCALE CARD -->
+        <div class="pricing-card reveal">
+          <span class="discount-badge">75% OFF</span>
+          <h3>Scale</h3>
+          <div class="price">$325 <s>$1,299</s></div>
+          <p class="muted" style="margin-bottom: 1.2rem;">Agency / high-volume</p>
+          <ul class="feature-list">
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> <strong>Unlimited replies</strong></li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> Unlimited posts/month</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> X + Reddit + LinkedIn</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> Priority writer team</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> Advanced switch signals</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> Dedicated account manager</li>
+            <li><i class="fas fa-check" style="color: var(--accent);"></i> Up to 10 products</li>
+          </ul>
+          <a href="#" class="btn-outline" style="display: block; text-align: center;">Contact sales</a>
+        </div>
+      </div>
+      <p style="text-align: center; margin-top: 2rem; color: var(--muted);" class="reveal">No contracts. Cancel anytime. 7-day money-back guarantee.</p>
+    </div>
+  </section>
+
+  <!-- COMPARISON TABLE -->
+  <section id="compare">
+    <div class="container">
+      <span class="section-tag reveal">Compare</span>
+      <h2 class="reveal">Why founders choose us.</h2>
+      <div class="table-wrapper reveal">
+        <table>
+          <thead><tr><th></th><th>DistroX</th><th>Agency</th><th>DIY</th></tr></thead>
+          <tbody>
+            <tr><td>Monthly cost</td><td>From $75 (launch)</td><td>$2k–$5k+</td><td>$0 (your time)</td></tr>
+            <tr><td>High-intent targeting</td><td>✅ AI + human</td><td>Sometimes</td><td>Manual</td></tr>
+            <tr><td>Human replies (no bots)</td><td>✅ Always</td><td>Varies</td><td>✅</td></tr>
+            <tr><td>Switch signals</td><td>✅ Built-in</td><td>❌ Rare</td><td>❌</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="container">
+    <div style="background: var(--ink); color: white; border-radius: 48px; padding: 4rem 2rem; text-align: center; margin: 4rem 0;" class="reveal">
+      <h2 style="color: white;">Stop scrolling. Start acquiring customers.</h2>
+      <p style="opacity: 0.8; max-width: 550px; margin: 1.5rem auto;">Let us find high-intent conversations and reply for you — while you build.</p>
+      <a href="#pricing" class="btn-primary" style="background: white; color: var(--ink);">Claim 75% discount →</a>
+    </div>
   </div>
-</section>
+</main>
 
-  
-<!-- WHY HUMAN -->
-<section class="why" id="why">
-  <div class="pricing-eyebrow reveal">The DistroHuman difference</div>
-  <h2 class="reveal">AI gets you ignored.<br><em>Humans get you remembered.</em></h2>
-  <p class="why-sub reveal">In 2025, every SaaS founder has seen 1,000 AI-generated comments. They scroll right past. Our Human Agents write things only a real person would write.</p>
-
-  <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-icon">🧠</div>
-      <h3>Context-aware, always</h3>
-      <p>Our Human Agents read the room. They understand the thread, the tone, the founder's pain — and reply with something that actually adds value. Founders respond to that.</p>
-      <div class="why-num">Real</div>
-    </div>
-    <div class="why-card reveal reveal-d1">
-      <div class="why-icon">🚫</div>
-      <h3>Zero bot signatures</h3>
-      <p>No "Great post! 🔥" comments. No mass copy-paste DMs. No flagged accounts. Every interaction passes the "did a human write this?" test — because a human did.</p>
-      <div class="why-num">100%</div>
-    </div>
-    <div class="why-card reveal reveal-d2">
-      <div class="why-icon">📣</div>
-      <h3>Platform algorithms love us</h3>
-      <p>Platforms actively reward genuine engagement and suppress bot behaviour. Our Human Agents are treated as real community members — not spam accounts to suppress.</p>
-      <div class="why-num">Organic</div>
-    </div>
-    <div class="why-card reveal">
-      <div class="why-icon">🎯</div>
-      <h3>SaaS founders only</h3>
-      <p>We don't spray and pray. Every agent is briefed on your niche and targets only verified SaaS builders, indie hackers, and micro-SaaS founders who are most likely to become customers.</p>
-      <div class="why-num">Precise</div>
-    </div>
-    <div class="why-card reveal reveal-d1">
-      <div class="why-icon">📅</div>
-      <h3>Every. Single. Day.</h3>
-      <p>Distribution compounds. A Human Agent showing up 5 days a week for 60 days builds brand recognition that no one-off campaign can match. Consistency is the strategy.</p>
-      <div class="why-num">Daily</div>
-    </div>
-    <div class="why-card reveal reveal-d2">
-      <div class="why-icon">📊</div>
-      <h3>Full transparency</h3>
-      <p>Every week, you get a report of exactly what was done — every comment, DM, and post. You see the work. You see the results. No guesswork, no trust-me-bro.</p>
-      <div class="why-num">Clear</div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta" id="cta">
-  <h2>Your SaaS deserves<br><em>to be discovered.</em></h2>
-  <p class="cta-p">Drop your email. We'll reach out within 24 hours to set up your Human Agents and start your distribution.</p>
-  <div class="cta-form">
-    <input class="cta-input" type="email" id="cta-email" placeholder="your@email.com" />
-    <button class="btn-fire" onclick="submitCTA()" style="cursor:none;">Get Started →</button>
-  </div>
-  <p class="cta-note" id="cta-note">No contracts. No setup fees. Cancel anytime.</p>
-</section>
-
-<!-- FOOTER -->
+<!-- FOOTER (MOBILE RESPONSIVE) -->
 <footer>
-  <div class="footer-logo">Distro<span class="dot">.</span>Human</div>
-  <div class="footer-links">
-    <a href="#results">Results</a>
-    <a href="#agents">Agents</a>
-    <a href="#pricing">Pricing</a>
+  <div class="container footer-inner">
+    <div class="logo">Distro<span style="color: var(--accent);">X</span></div>
+    <div class="footer-links">
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+    <div style="color: var(--muted); font-size: 0.9rem;">© 2025 DistroX</div>
   </div>
-  <p>© 2025 DistroHuman. Built for SaaS founders who hate distribution.</p>
 </footer>
 
+<!-- INTERSECTION OBSERVER + COUNTDOWN TIMER -->
 <script>
-// Custom cursor
-const cur = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cur.style.left = e.clientX + 'px';
-  cur.style.top  = e.clientY + 'px';
-});
-document.querySelectorAll('a,button,input[type=range]').forEach(el => {
-  el.addEventListener('mouseenter', () => cur.classList.add('big'));
-  el.addEventListener('mouseleave', () => cur.classList.remove('big'));
-});
+  (function() {
+    // REVEAL ANIMATIONS
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -20px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    
+    // SMOOTH SCROLL
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === "#" || href === "") return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
 
-// Scroll reveal
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if(e.isIntersecting){
-      setTimeout(() => e.target.classList.add('in'), i * 55);
-      obs.unobserve(e.target);
+    // COUNTDOWN TIMER (ends May 15, 2026)
+    function updateTimer() {
+      const endDate = new Date('May 15, 2026 23:59:59').getTime();
+      const now = new Date().getTime();
+      const distance = endDate - now;
+      
+      const timerEl = document.getElementById('countdown-timer');
+      if (!timerEl) return;
+      
+      if (distance < 0) {
+        timerEl.innerHTML = "EXPIRED";
+        return;
+      }
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (86400000)) / (3600000));
+      const minutes = Math.floor((distance % 3600000) / 60000);
+      const seconds = Math.floor((distance % 60000) / 1000);
+      
+      timerEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
-  });
-}, {threshold: 0.08});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// Calculator
-function updateCalc() {
-  const agents  = +document.getElementById('agents-slider').value;
-  const plats   = +document.getElementById('plat-slider').value;
-  const actions = +document.getElementById('actions-slider').value;
-
-  document.getElementById('agents-val').textContent  = agents;
-  document.getElementById('plat-val').textContent    = plats;
-  document.getElementById('actions-val').textContent = actions;
-
-  const totalAgents = agents * plats;
-  const basePerAgent = 90;
-  const actionMult   = actions <= 10 ? 1 : actions <= 15 ? 1.2 : actions <= 20 ? 1.5 : actions <= 25 ? 1.85 : 2.3;
-  const price        = Math.round(totalAgents * basePerAgent * actionMult);
-  const daily        = totalAgents * actions;
-  const monthly      = daily * 30;
-
-  document.getElementById('calc-price-num').textContent = price.toLocaleString();
-  document.getElementById('c-agents').textContent  = totalAgents;
-  document.getElementById('c-plats').textContent   = plats;
-  document.getElementById('c-actions').textContent = actions;
-  document.getElementById('c-daily').textContent   = daily.toLocaleString();
-  document.getElementById('c-monthly-txt').textContent =
-    `That's ${monthly.toLocaleString()}+ real conversations with SaaS founders every month.`;
-}
-updateCalc();
-
-// CTA
-function submitCTA() {
-  const email = document.getElementById('cta-email').value.trim();
-  const note  = document.getElementById('cta-note');
-  if(!email || !email.includes('@')) {
-    note.textContent = '⚠ Please enter a valid email address.';
-    note.style.color = 'var(--fire2)';
-    return;
-  }
-  note.textContent = '✓ We\'ll reach out within 24 hours. Check your inbox.';
-  note.className = 'cta-note success';
-  document.getElementById('cta-email').value = '';
-}
+    
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  })();
 </script>
 </body>
 </html>
