@@ -1296,6 +1296,642 @@ tr:hover td:first-child {
     font-size: 0.8rem;
     font-weight: 500;
 }
+
+/* ==================== COMPLETE MOBILE RESPONSIVENESS ==================== */
+/* Add all of these media queries at the end of your existing CSS */
+
+/* Small Mobile Devices (320px - 480px) */
+@media (max-width: 480px) {
+  /* Container */
+  .container {
+    padding: 0 1rem;
+  }
+
+  /* Navigation */
+  nav {
+    padding: 0.8rem 1rem;
+  }
+
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .nav-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    line-height: 1.2;
+  }
+
+  .hero-badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 1rem 0.25rem 0.6rem;
+  }
+
+  .hero-desc {
+    font-size: 0.9rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+  }
+
+  .stat-item {
+    flex: 1 1 40%;
+  }
+
+  .stat-item .num {
+    font-size: 1.5rem;
+  }
+
+  /* Hero Card */
+  .hero-card {
+    padding: 1rem;
+  }
+
+  .example-post {
+    padding: 1rem;
+  }
+
+  .post-content {
+    font-size: 0.9rem;
+  }
+
+  .reply-bubble {
+    padding: 1rem;
+  }
+
+  .reply-text {
+    font-size: 0.9rem;
+  }
+
+  /* Who Banner */
+  .who-wrapper,
+  .who-banner {
+    padding: 1.5rem 1rem;
+    border-radius: 24px;
+  }
+
+  .who-banner p {
+    font-size: 1rem;
+  }
+
+  .persona-pill {
+    width: 100%;
+    padding: 0.8rem 1rem;
+  }
+
+  .pill-content strong {
+    font-size: 1rem;
+  }
+
+  /* Section Tags */
+  .section-tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 1rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  /* How It Works Steps */
+  .steps-visual {
+    gap: 1rem;
+  }
+
+  .step-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .step-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.4rem;
+  }
+
+  .step-card h4 {
+    font-size: 1.2rem;
+  }
+
+  .quote-sample {
+    font-size: 0.85rem;
+    padding: 0.7rem;
+  }
+
+  /* Example Section */
+  .example-showcase,
+  .example-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .example-card {
+    padding: 1rem;
+  }
+
+  .example-card.reply {
+    margin-left: 1.5rem;
+  }
+
+  .example-thread-line {
+    left: 1.2rem;
+  }
+
+  .stats-badge-container {
+    flex-wrap: wrap;
+  }
+
+  .stat-pill {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+
+  /* X Section */
+  .x-container {
+    padding: 2rem 1rem;
+    border-radius: 24px;
+  }
+
+  .x-card {
+    padding: 1rem;
+  }
+
+  .x-body {
+    font-size: 0.95rem;
+  }
+
+  .x-stats {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* Compare Grid */
+  .compare-grid-2 {
+    gap: 1rem;
+  }
+
+  .card-neutral,
+  .card-good {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .battle-card {
+    padding: 1.5rem;
+  }
+
+  /* Signal Terminal */
+  .signal-terminal {
+    padding: 1rem;
+    font-size: 0.75rem;
+  }
+
+  .terminal-line {
+    font-size: 0.75rem;
+  }
+
+  /* Capacity Box */
+  .capacity-box {
+    padding: 1rem 1.2rem;
+    width: 100%;
+  }
+
+  .capacity-header {
+    font-size: 0.8rem;
+  }
+
+  .urgency-badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  /* Pricing Section */
+  .pricing-grid {
+    gap: 1.2rem;
+  }
+
+  .pricing-card {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .discount-badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.8rem;
+  }
+
+  .price {
+    font-size: 2.2rem;
+  }
+
+  .price s {
+    font-size: 1rem;
+  }
+
+  .feature-list li {
+    font-size: 0.85rem;
+    padding: 0.4rem 0;
+  }
+
+  .timer-box {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  #countdown-timer {
+    font-size: 0.9rem;
+  }
+
+  /* Table Wrapper */
+  .table-wrapper {
+    border-radius: 16px;
+    margin: 1.5rem 0;
+  }
+
+  table {
+    min-width: 500px;
+  }
+
+  th, td {
+    padding: 0.8rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    gap: 1rem;
+  }
+
+  .testimonial {
+    padding: 1.5rem;
+  }
+
+  .stars {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .testimonial p {
+    font-size: 0.9rem;
+  }
+
+  /* CTA Section */
+  .cta-wrapper {
+    padding: 3rem 0;
+  }
+
+  .cta-card-interactive {
+    padding: 2.5rem 1rem;
+    border-radius: 32px;
+  }
+
+  .cta-avatar-stack {
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .cta-card-interactive h2 {
+    font-size: 1.8rem;
+  }
+
+  .cta-button-container {
+    margin-top: 1.5rem;
+  }
+
+  .trust-badge-footer {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 2rem;
+  }
+
+  /* Footer */
+  footer {
+    padding: 2rem 0;
+  }
+
+  .footer-inner {
+    gap: 1.5rem;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+    gap: 1rem 1.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+  }
+
+  /* Result Items */
+  .result-item {
+    padding: 8px 12px;
+  }
+
+  .result-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  .result-text {
+    font-size: 0.75rem;
+  }
+
+  /* Signal Showcase */
+  .signal-showcase {
+    padding: 1.5rem 1rem;
+  }
+
+  .signal-match {
+    padding: 0.8rem;
+  }
+}
+
+/* Tablet Devices (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  /* Hero */
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+  }
+
+  .hero-stats {
+    gap: 1.5rem;
+  }
+
+  /* Steps */
+  .steps-visual {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .step-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Example */
+  .example-card.reply {
+    margin-left: 2rem;
+  }
+
+  /* X Section */
+  .x-container {
+    padding: 2.5rem 1.5rem;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* CTA */
+  .cta-card-interactive {
+    padding: 3rem 1.5rem;
+  }
+
+  /* Footer */
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+}
+
+/* Medium Screens (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  /* Hero Grid */
+  .hero-grid {
+    gap: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  /* Steps */
+  .steps-visual {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .step-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .step-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .pricing-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .price {
+    font-size: 2.2rem;
+  }
+
+  /* X Section */
+  .x-container {
+    padding: 3rem 2rem;
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* CTA */
+  .cta-card-interactive {
+    padding: 4rem 2rem;
+  }
+}
+
+/* Large Screens (1025px - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .container {
+    padding: 0 2rem;
+  }
+
+  .hero h1 {
+    font-size: 3.2rem;
+  }
+
+  .pricing-grid {
+    gap: 1.5rem;
+  }
+}
+
+/* Extra Large Screens (1281px and above) */
+@media (min-width: 1281px) {
+  .container {
+    max-width: 1320px;
+  }
+
+  .hero h1 {
+    font-size: 3.8rem;
+  }
+}
+
+/* Fix for Navigation Links on Mobile (if you want to show them) */
+@media (max-width: 900px) {
+  .nav-links {
+    display: none; /* Hidden by default on mobile */
+  }
+
+  /* Optional: Add a hamburger menu here if needed */
+}
+
+/* Ensure images and embeds are responsive */
+img, svg, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix for overflow issues */
+body {
+  overflow-x: hidden;
+}
+
+/* Ensure reveal animations work on mobile */
+@media (max-width: 768px) {
+  .reveal {
+    transform: translateY(20px);
+  }
+}
+
+/* Fix for comparison table on small screens */
+@media (max-width: 640px) {
+  .table-wrapper {
+    margin: 1rem -1rem;
+    border-radius: 0;
+  }
+
+  table {
+    font-size: 0.75rem;
+  }
+
+  th, td {
+    padding: 0.6rem;
+  }
+}
+
+/* Fix for timer box on small screens */
+@media (max-width: 480px) {
+  .timer-box {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  #countdown-timer {
+    display: block;
+    margin-top: 5px;
+  }
+}
+
+/* Fix for persona pills on small screens */
+@media (max-width: 600px) {
+  .persona-grid {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .persona-pill {
+    width: 100%;
+  }
+}
+
+/* Fix for CTA buttons on small screens */
+@media (max-width: 400px) {
+  .btn-primary, .btn-outline {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.85rem;
+  }
+
+  .cta-button-container .btn-primary {
+    width: 100%;
+  }
+}
+
+/* Ensure all sections have proper spacing on mobile */
+@media (max-width: 768px) {
+  section {
+    padding: 40px 0;
+  }
+
+  #example {
+    padding-top: 0;
+  }
+
+  .x-workflow-section {
+    padding: 50px 0;
+  }
+}
+
+/* Fix for overlapping elements */
+@media (max-width: 480px) {
+  .hero-stats {
+    flex-wrap: wrap;
+  }
+
+  .compare-battle {
+    gap: 1rem;
+  }
+
+  .x-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
   </style>
 </head>
 <body>
