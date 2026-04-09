@@ -547,6 +547,755 @@
 	.nav-links a:hover {
 	  color: var(--ink); /* Turns black when you hover over it */
 	}
+	/* Result Item Styling */
+	.result-item {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		background: white;
+		padding: 10px 15px;
+		border-radius: 12px;
+		margin-top: 10px;
+		border: 1px solid var(--border-light);
+		box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+		transition: all 0.3s ease;
+		cursor: default;
+	}
+
+	.result-item:hover {
+		transform: translateX(8px);
+		border-color: #22C55E; /* Success Green */
+		box-shadow: 0 8px 20px rgba(34, 197, 94, 0.1);
+	}
+
+	.result-icon {
+		width: 32px;
+		height: 32px;
+		border-radius: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.9rem;
+	}
+
+	.bg-blue { background: #E0F2FE; color: #0369A1; }
+	.bg-purple { background: #F3E8FF; color: #7E22CE; }
+	.bg-green { background: #DCFCE7; color: #15803D; }
+
+	.result-text {
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
+	
+	/* Hero Card Enhancements */
+	.status-tag {
+	  background: #E0F2FE;
+	  color: #0369A1;
+	  padding: 2px 8px;
+	  border-radius: 4px;
+	  font-size: 0.7rem;
+	  font-weight: 700;
+	  margin-left: auto;
+	  text-transform: uppercase;
+	}
+
+	.typing-dot-container {
+	  width: 10px;
+	  height: 10px;
+	  background: var(--accent);
+	  border-radius: 50%;
+	  position: relative;
+	}
+
+	.typing-dot {
+	  width: 100%;
+	  height: 100%;
+	  background: var(--accent);
+	  border-radius: 50%;
+	  position: absolute;
+	  animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+	}
+
+	@keyframes ping {
+	  75%, 100% { transform: scale(2.5); opacity: 0; }
+	}
+
+	#typewriter-text {
+	  min-height: 3em;
+	  font-weight: 500;
+	  line-height: 1.6;
+	}
+
+	.sent-badge {
+	  margin-top: 15px;
+	  font-size: 0.8rem;
+	  font-weight: 700;
+	  color: #16a34a;
+	  display: flex;
+	  align-items: center;
+	  gap: 6px;
+	  opacity: 0;
+	  transform: translateY(10px);
+	  transition: all 0.5s ease;
+	}
+
+	.sent-badge.show {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+
+	.reply-highlight {
+	  color: var(--accent);
+	  font-weight: 800;
+	  border-bottom: 2px solid var(--accent-glow);
+	}
+	/* WHO SECTION INTERACTIVE STYLES */
+	.who-section {
+	  padding: 60px 0; /* Creates the space you were missing */
+	}
+
+	.who-wrapper {
+	  background: var(--ink);
+	  color: white;
+	  border-radius: 40px;
+	  padding: 3.5rem 2rem;
+	  text-align: center;
+	  position: relative;
+	  overflow: hidden;
+	  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+	}
+
+	.who-label {
+	  font-size: 0.9rem;
+	  text-transform: uppercase;
+	  letter-spacing: 0.15em;
+	  color: var(--accent-soft);
+	  margin-bottom: 2rem;
+	  font-weight: 700;
+	}
+
+	.persona-grid {
+	  display: flex;
+	  flex-wrap: wrap;
+	  justify-content: center;
+	  gap: 1.5rem;
+	  margin-bottom: 2rem;
+	}
+
+	.persona-pill {
+	  background: rgba(255, 255, 255, 0.05);
+	  border: 1px solid rgba(255, 255, 255, 0.1);
+	  padding: 1rem 1.8rem;
+	  border-radius: 100px;
+	  display: flex;
+	  align-items: center;
+	  gap: 12px;
+	  cursor: pointer;
+	  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+	  position: relative;
+	}
+
+	.persona-pill:hover {
+	  background: white;
+	  transform: translateY(-5px);
+	  border-color: var(--accent);
+	}
+
+	.persona-pill:hover .pill-content strong {
+	  color: var(--ink);
+	}
+
+	.persona-pill .pill-icon {
+	  font-size: 1.4rem;
+	}
+
+	.pill-content {
+	  display: flex;
+	  flex-direction: column;
+	  align-items: flex-start;
+	  text-align: left;
+	}
+
+	.pill-content strong {
+	  font-size: 1.1rem;
+	  transition: color 0.3s;
+	}
+
+	.pill-hover-text {
+	  font-size: 0.75rem;
+	  color: var(--muted);
+	  max-height: 0;
+	  opacity: 0;
+	  overflow: hidden;
+	  transition: all 0.3s ease;
+	}
+
+	.persona-pill:hover .pill-hover-text {
+	  max-height: 40px;
+	  opacity: 1;
+	  margin-top: 4px;
+	}
+
+	.who-subtext {
+	  opacity: 0.6;
+	  font-size: 0.95rem;
+	  font-weight: 300;
+	}
+
+	/* Mobile Tweak */
+	@media (max-width: 768px) {
+	  .persona-pill { width: 100%; justify-content: center; }
+	  .pill-content { align-items: center; text-align: center; }
+	}
+	/* Card 1: Scanning Animation */
+.keyword-scanner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 1rem 0;
+}
+
+.keyword {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  background: rgba(0,0,0,0.04);
+  border-radius: 4px;
+  color: var(--muted);
+  position: relative;
+  overflow: hidden;
+}
+
+.keyword.active {
+  color: var(--accent);
+  background: var(--accent-glow);
+  font-weight: 700;
+}
+
+.keyword.active::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  animation: scan-shimmer 2s infinite;
+}
+
+@keyframes scan-shimmer {
+  100% { left: 100%; }
+}
+
+/* Card 2: Human Verification Animation */
+.human-verify {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: #16a34a;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.verify-dot {
+  width: 8px;
+  height: 8px;
+  background: #16a34a;
+  border-radius: 50%;
+  box-shadow: 0 0 0 rgba(22, 163, 74, 0.4);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+}
+
+/* General Card Hover */
+.step-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+/* Example Section Interactions */
+.example-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.example-thread-line {
+  position: absolute;
+  left: 2.5rem;
+  top: 4rem;
+  bottom: 2rem;
+  width: 2px;
+  background: var(--border-medium);
+  z-index: 1;
+}
+
+.example-card {
+  position: relative;
+  z-index: 2;
+  background: white;
+  border-radius: 24px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-light);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.example-card.reply {
+  margin-left: 3rem; /* Indent like a real thread */
+}
+
+.example-card:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.stats-badge-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 1.2rem;
+  overflow: hidden;
+}
+
+.stat-pill {
+  background: #F0FDF4;
+  color: #166534;
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #DCFCE7;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.example-card:hover .stat-pill {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Staggered animation for the 3 pills */
+.example-card:hover .stat-pill:nth-child(1) { transition-delay: 0.1s; }
+.example-card:hover .stat-pill:nth-child(2) { transition-delay: 0.2s; }
+.example-card:hover .stat-pill:nth-child(3) { transition-delay: 0.3s; }
+
+/* X Section Specifics */
+.x-workflow-section {
+  padding: 100px 0;
+  background-color: var(--surface);
+}
+
+.x-container {
+  background: #000000; /* Dark Mode X Aesthetic */
+  border-radius: 48px;
+  padding: 4rem 2.5rem;
+  color: white;
+}
+
+.x-feed-item {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.x-card {
+  background: #16181C; /* X Dark Mode Card */
+  border: 1px solid #2F3336;
+  border-radius: 16px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.x-card:hover {
+  background: #1c1f23;
+  border-color: #4b4e52;
+}
+
+.x-user-info {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.x-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #333;
+}
+
+.x-handle {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.x-handle span {
+  color: #71767B;
+  font-weight: 400;
+  margin-left: 4px;
+}
+
+.x-body {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.x-body strong {
+  color: var(--accent-soft);
+}
+
+/* Signal Pulse Animation */
+.signal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(29, 155, 240, 0.1);
+  color: #1D9BF0;
+  padding: 4px 12px;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(29, 155, 240, 0.2);
+}
+
+.pulse-dot {
+  width: 6px;
+  height: 6px;
+  background: #1D9BF0;
+  border-radius: 50%;
+  animation: x-pulse 2s infinite;
+}
+
+@keyframes x-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(29, 155, 240, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(29, 155, 240, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(29, 155, 240, 0); }
+}
+
+/* Conversion Metrics (X Style) */
+.x-stats {
+  display: flex;
+  gap: 20px;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #2F3336;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.x-card:hover .x-stats {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.x-stat-item {
+  color: #71767B;
+  font-size: 0.85rem;
+}
+
+.x-stat-item strong {
+  color: white;
+}
+
+/* Why It Works - Interaction */
+.compare-battle {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+@media (min-width: 768px) {
+  .compare-battle { grid-template-columns: 1fr 1fr; }
+}
+
+.battle-card {
+  padding: 2.5rem;
+  border-radius: 32px;
+  position: relative;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.card-ads { background: #fff; }
+.card-distrox { 
+  background: var(--ink); 
+  color: white; 
+  box-shadow: 0 20px 40px var(--accent-glow);
+}
+
+.battle-card:hover { transform: translateY(-10px); }
+
+.cost-indicator {
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Switch Signal Terminal */
+.signal-terminal {
+  background: #111;
+  border-radius: 24px;
+  padding: 1.5rem;
+  font-family: 'Monaco', monospace;
+  margin-top: 2rem;
+  border: 1px solid #333;
+}
+
+.terminal-line {
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  display: flex;
+  gap: 10px;
+}
+
+.t-blue { color: #3b82f6; }
+.t-green { color: #22c55e; }
+.t-orange { color: var(--accent); }
+
+.signal-match {
+  background: rgba(242, 92, 50, 0.15);
+  border: 1px solid var(--accent);
+  padding: 1rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  animation: flash 2s infinite;
+}
+
+@keyframes flash {
+  0%, 100% { border-color: var(--accent); }
+  50% { border-color: transparent; }
+}
+/* Capacity Tracker Styling */
+.capacity-container-centered {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 2rem 0 3rem;
+}
+
+.capacity-box {
+  background: white;
+  border: 1px solid var(--border-medium);
+  border-radius: 24px;
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  box-shadow: var(--shadow-sm);
+  max-width: 450px;
+  width: 100%;
+}
+
+.capacity-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+/* The Progress Bar */
+.progress-track {
+  width: 100%;
+  height: 12px;
+  background: #F1F1F1;
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 85%; /* Adjust this to show how "full" you are */
+  background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+  border-radius: 100px;
+  animation: progress-glow 2s infinite;
+}
+
+@keyframes progress-glow {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+.urgency-badge {
+  background: #FFFBEB;
+  color: #B45309;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+/* Interactive Comparison Table */
+.table-wrapper {
+  margin-top: 3rem;
+  background: white;
+  border-radius: 32px;
+  padding: 1rem;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+th, td {
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+}
+
+/* Align the feature names to the left */
+th:first-child, td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: var(--muted);
+  width: 30%;
+}
+
+/* The DistroX Column Spotlight */
+.col-distrox {
+  background: rgba(242, 92, 50, 0.03);
+  position: relative;
+}
+
+th.col-distrox {
+  color: var(--accent);
+  font-weight: 800;
+  font-size: 1.1rem;
+  background: rgba(242, 92, 50, 0.05);
+}
+
+/* Hover Interaction: Dim other columns when focusing on one */
+tr:hover td {
+  opacity: 0.5;
+}
+
+tr:hover td.col-distrox, 
+tr:hover td:first-child {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+/* Custom Icon Colors */
+.check-icon { color: #22c55e; font-size: 1.1rem; }
+.cross-icon { color: #ef4444; font-size: 1.1rem; }
+.neutral-icon { color: #a1a1aa; font-size: 1rem; }
+
+/* Desktop-only: highlight the best choice header */
+.best-choice-badge {
+  background: var(--accent);
+  color: white;
+  font-size: 0.65rem;
+  padding: 4px 10px;
+  border-radius: 100px;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+/* CTA Interaction & Visual Polish */
+.cta-wrapper {
+    position: relative;
+    padding: 6rem 0;
+}
+
+.cta-card-interactive {
+    background: var(--ink);
+    color: white;
+    border-radius: 48px;
+    padding: 5rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
+}
+
+/* The Subtle Background Glow */
+.cta-card-interactive::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.cta-avatar-stack {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: -10px; /* Overlap effect */
+}
+
+.cta-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid var(--ink);
+    background: #333;
+    margin-left: -12px;
+}
+
+.cta-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 2.5rem;
+}
+
+.cta-button-container .btn-primary:hover {
+    transform: scale(1.05);
+    background: white;
+    color: var(--accent);
+}
+
+.trust-badge-footer {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 3rem;
+    opacity: 0.6;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
   </style>
 </head>
 <body>
@@ -590,33 +1339,66 @@
 
       <!-- Visual message card (prominently visible) -->
       <div class="hero-card reveal">
-        <div class="example-post">
-          <div class="post-meta"><i class="fab fa-reddit-alien"></i> r/SaaS · 2 hours ago</div>
-          <div class="post-content">"Anyone know a tool for automating client invoices? Spreadsheets are killing me."</div>
-        </div>
-        <div class="reply-bubble">
-          <div class="reply-author">
-            <span style="background: var(--accent); width: 28px; height: 28px; border-radius: 50%; display: inline-block;"></span>
-            <span>YourProduct · 45 min ago</span>
-          </div>
-          <div class="reply-text">
-            I had the exact same problem — ended up using <span class="reply-highlight">[Your SaaS]</span>. 
-            It auto-generates invoices and saved me ~6h/week.
-          </div>
-        </div>
-        <p style="margin-top: 1.2rem; font-size: 0.85rem; color: var(--muted);">
-          <i class="fas fa-check-circle" style="color: var(--accent);"></i> Real reply, real results.
-        </p>
-      </div>
+	  <div class="example-post">
+		<div class="post-meta">
+		  <i class="fab fa-reddit-alien"></i> r/SaaS · 2 hours ago
+		  <span class="status-tag">High Intent Identified</span>
+		</div>
+		<div class="post-content">"Anyone know a tool for automating client invoices? Spreadsheets are killing me."</div>
+	  </div>
+
+	  <div class="reply-bubble">
+		<div class="reply-author">
+		  <div class="typing-dot-container">
+			<span class="typing-dot"></span>
+		  </div>
+		  <span>DistroX Expert writing...</span>
+		</div>
+		<div class="reply-text" id="typewriter-text">
+		  </div>
+		<div class="sent-badge" id="sent-badge">
+		  <i class="fas fa-check-double"></i> Reply Sent & Driving Traffic
+		</div>
+	  </div>
+	</div>
     </div>
   </section>
 
-  <!-- WHO SECTION -->
+  <section class="who-section">
   <div class="container reveal">
-    <div class="who-banner">
-      <p>⚡ Built for <strong>indie hackers, SaaS founders, and early-stage startups</strong> who don’t have time for manual outreach.</p>
+    <div class="who-wrapper">
+      <p class="who-label">Optimized for those who ship fast:</p>
+      
+      <div class="persona-grid">
+        <div class="persona-pill">
+          <span class="pill-icon">🚀</span>
+          <div class="pill-content">
+            <strong>Indie Hackers</strong>
+            <span class="pill-hover-text">Validate your MVP with real traffic.</span>
+          </div>
+        </div>
+
+        <div class="persona-pill">
+          <span class="pill-icon">🛠️</span>
+          <div class="pill-content">
+            <strong>SaaS Founders</strong>
+            <span class="pill-hover-text">Automate growth while you build features.</span>
+          </div>
+        </div>
+
+        <div class="persona-pill">
+          <span class="pill-icon">📈</span>
+          <div class="pill-content">
+            <strong>Early-Stage Startups</strong>
+            <span class="pill-hover-text">Scale distribution without a $5k agency.</span>
+          </div>
+        </div>
+      </div>
+      
+      <p class="who-subtext">Stop wasting hours on manual outreach. Let us handle the hustle.</p>
     </div>
   </div>
+</section>
 
   <!-- HOW IT WORKS -->
   <section id="how">
@@ -624,75 +1406,218 @@
       <span class="section-tag reveal">How it works</span>
       <h2 class="reveal">We find the posts. We write the replies. You get customers.</h2>
       <div class="steps-visual">
-        <div class="step-card reveal">
-          <div class="step-icon"><i class="fas fa-search"></i></div>
-          <h4>1. We find posts like</h4>
-          <div class="quote-sample">"Looking for a tool to automate invoices"</div>
-          <p>Our system scans Reddit & X 24/7 for high-intent questions and "switch signals".</p>
-        </div>
-        <div class="step-card reveal">
-          <div class="step-icon"><i class="fas fa-pen-fancy"></i></div>
-          <h4>2. We reply (human)</h4>
-          <div class="quote-sample">"I had the same problem — this tool helped me..."</div>
-          <p>Real humans craft helpful replies. No bots. Your product mentioned naturally.</p>
-        </div>
-        <div class="step-card reveal">
-          <div class="step-icon"><i class="fas fa-chart-line"></i></div>
-          <h4>3. You get</h4>
-          <ul style="list-style: none; margin-top: 1rem;">
-            <li>→ Clicks from warm audiences</li>
-            <li>→ Signups & trials</li>
-            <li>→ Paying customers</li>
-          </ul>
-        </div>
+  <div class="step-card reveal">
+    <div class="step-icon"><i class="fas fa-search"></i></div>
+    <h4>1. We find the intent</h4>
+    <div class="keyword-scanner">
+      <span class="keyword">"alternative to..."</span>
+      <span class="keyword active">"how to automate"</span>
+      <span class="keyword">"help with..."</span>
+      <span class="keyword active">"tool for..."</span>
+    </div>
+    <div class="quote-sample">"Looking for a tool to automate invoices"</div>
+    <p>Our AI scans X & Reddit 24/7, pinpointing users who have the exact problem you solve.</p>
+  </div>
+
+  <div class="step-card reveal">
+    <div class="step-icon"><i class="fas fa-pen-fancy"></i></div>
+    <h4>2. We reply (Human)</h4>
+    <div class="quote-sample" style="border-left: 3px solid #16a34a;">
+      "I had the same problem — ended up using [Your SaaS]..."
+    </div>
+    <div class="human-verify">
+      <div class="verify-dot"></div>
+      <i class="fas fa-user-check"></i> Quality Verified by Human Expert
+    </div>
+    <p style="margin-top: 1rem;">No AI-slop. We write helpful, value-first replies that build trust and drive high-quality traffic.</p>
+  </div>
+
+  <div class="step-card reveal">
+    <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+    <h4>3. You get results</h4>
+    <div class="results-container">
+      <div class="result-item">
+        <div class="result-icon bg-blue"><i class="fas fa-mouse-pointer"></i></div>
+        <div class="result-text">+142 Warm Clicks</div>
       </div>
+      <div class="result-item">
+        <div class="result-icon bg-purple"><i class="fas fa-user-plus"></i></div>
+        <div class="result-text">12 New Signups</div>
+      </div>
+      <div class="result-item">
+        <div class="result-icon bg-green"><i class="fas fa-credit-card"></i></div>
+        <div class="result-text">$1,200 New MRR</div>
+      </div>
+    </div>
+    <p style="margin-top: 1.5rem;">Watch your dashboard grow while we handle the manual hustle.</p>
+  </div>
+</div>
     </div>
   </section>
 
   <!-- EXAMPLE SECTION -->
-  <section id="example">
-    <div class="container">
-      <div style="background: #F2EFE9; border-radius: 36px; padding: 2rem 1.5rem;" class="reveal">
-        <span class="section-tag" style="background: white;">Real example</span>
-        <h2>This is exactly what we do.</h2>
-        <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 1.5rem;">
-          <div style="background: white; border-radius: 24px; padding: 1.5rem;">
-            <div style="font-weight: 600; margin-bottom: 1rem;"><i class="fab fa-reddit-alien"></i> Reddit post</div>
-            <div style="background: #FAF8F3; padding: 1.2rem; border-radius: 20px;">“Our team wastes 2h/day on manual data entry. Any lightweight automation tools?”</div>
+<section id="example">
+  <div class="container">
+    <div style="background: #F2EFE9; border-radius: 48px; padding: 4rem 2.5rem;" class="reveal">
+      <span class="section-tag" style="background: white;">Live Workflow Example</span>
+      <h2 style="margin-bottom: 2.5rem;">This is exactly how we grow your SaaS.</h2>
+      
+      <div class="example-container">
+        <div class="example-thread-line"></div>
+        
+        <div class="example-card">
+          <div style="font-weight: 700; font-size: 0.85rem; color: var(--muted); margin-bottom: 0.8rem;">
+            <i class="fab fa-reddit-alien"></i> r/GrowthHacking · Found by DistroX AI
           </div>
-          <div style="background: white; border-radius: 24px; padding: 1.5rem;">
-            <div style="font-weight: 600; margin-bottom: 1rem;"><i class="fas fa-reply"></i> Our reply</div>
-            <div style="background: #FAF8F3; padding: 1.2rem; border-radius: 20px;">“I totally get this. We switched to <strong>[Client SaaS]</strong> and set up flows in 20 mins.”</div>
-            <p style="margin-top: 1rem;"><i class="fas fa-chart-simple" style="color: var(--accent);"></i> 27 clicks · 9 signups · 2 customers</p>
+          <div style="font-size: 1.1rem; font-weight: 500; line-height: 1.5;">
+            “Our team wastes 2h/day on manual data entry. Any lightweight automation tools that don't cost a fortune?”
+          </div>
+        </div>
+
+        <div class="example-card reply">
+          <div style="font-weight: 700; font-size: 0.85rem; color: var(--accent); margin-bottom: 0.8rem;">
+            <i class="fas fa-user-edit"></i> DistroX Human Expert replied:
+          </div>
+          <div style="font-size: 1.1rem; font-weight: 500; line-height: 1.5; color: var(--ink);">
+            “I totally get this. We switched to <span style="color: var(--accent); text-decoration: underline;">AutoFill SaaS</span> last month. Set up our first flows in 20 mins and the support is great.”
+          </div>
+          
+          <div class="stats-badge-container">
+            <div class="stat-pill"><i class="fas fa-mouse-pointer"></i> 27 Clicks</div>
+            <div class="stat-pill"><i class="fas fa-user-plus"></i> 9 Signups</div>
+            <div class="stat-pill"><i class="fas fa-dollar-sign"></i> 2 Customers</div>
+          </div>
+          
+          <div style="margin-top: 1rem; font-size: 0.75rem; color: var(--muted); font-style: italic;">
+            Hover to see the conversion impact ↑
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<section class="x-workflow-section">
+  <div class="container">
+    <div class="x-container reveal">
+      <div style="text-align: center; margin-bottom: 3.5rem;">
+        <span class="section-tag" style="background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.2);">X (Twitter) Workflow</span>
+        <h2 style="color: white; margin-top: 1rem;">We intercept competitor complaints.</h2>
+      </div>
+
+      <div class="x-feed-item">
+        <div class="signal-badge">
+          <div class="pulse-dot"></div>
+          SWITCH SIGNAL DETECTED
+        </div>
+
+        <div class="x-card">
+          <div class="x-user-info">
+            <div class="x-avatar" style="background: #444;"></div>
+            <div class="x-handle">Frustrated Founder <span>@startup_phil</span></div>
+          </div>
+          <div class="x-body">
+            Honestly, <strong>[Big Competitor]</strong> has become so bloated and expensive. I just want a simple CRM that doesn't require a 3-week onboarding. Any minimalist alternatives? 👇
+          </div>
+          <div style="color: #71767B; font-size: 0.85rem;">11:42 AM · May 12, 2026</div>
+        </div>
+
+        <div class="x-card" style="border-left: 2px solid var(--accent);">
+          <div class="x-user-info">
+            <div class="x-avatar" style="background: var(--accent);"></div>
+            <div class="x-handle">DistroX Expert <span>@distrox_hq</span></div>
+          </div>
+          <div class="x-body">
+            Feel that pain! We moved our team to <strong>NanoCRM</strong> for exactly this reason. Super clean, setup took 10 mins, and much cheaper. Highly recommend checking them out!
+          </div>
+          
+          <div class="x-stats">
+            <div class="x-stat-item"><strong>48</strong> Clicks</div>
+            <div class="x-stat-item"><strong>14</strong> Trials</div>
+            <div class="x-stat-item" style="color: var(--accent-soft);"><strong>+ $240</strong> New MRR</div>
+          </div>
+        </div>
+        
+        <p style="text-align: center; font-size: 0.8rem; color: #71767B; margin-top: 1.5rem;">
+          <i class="fas fa-mouse-pointer"></i> Hover over our reply to see the ROI
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- WHY IT WORKS (ADS FIXED: high intent ads not 'cold') -->
-  <section>
-    <div class="container">
-      <span class="section-tag reveal">Why this works better</span>
-      <div class="compare-grid-2">
-        <div class="card-neutral reveal">
-          <h3><i class="fas fa-bullhorn"></i> Traditional ads</h3>
-          <p style="margin-top: 1rem;">Can be high intent, but expensive and require constant optimization. You pay for every click.</p>
-        </div>
-        <div class="card-good reveal">
-          <h3><i class="fas fa-comments"></i> Our approach</h3>
-          <p style="margin-top: 1rem;">We insert your product into existing conversations where people <strong>already ask for a solution</strong>, zero ad spend.</p>
+ <section>
+  <div class="container">
+    <span class="section-tag reveal">The Distribution Gap</span>
+    <h2 class="reveal">Stop interrupting. Start solving.</h2>
+    
+    <div class="compare-battle">
+      <div class="battle-card card-ads reveal">
+        <div style="font-size: 2rem; margin-bottom: 1rem;">📢</div>
+        <h3>Traditional Ads</h3>
+        <p style="color: var(--muted); margin-top: 1rem;">
+          You pay to show up in front of people who <em>might</em> need you. You're competing with 100 other banners for attention.
+        </p>
+        <div class="cost-indicator" style="color: #ef4444;">
+          <i class="fas fa-chart-line-down"></i> High Burn · $5 - $15 per click
         </div>
       </div>
 
-      <!-- Switch signals -->
-      <div style="background: linear-gradient(145deg, #FFFFFF, #F9F6F1); border-radius: 36px; padding: 2rem 1.5rem; margin: 2rem 0;" class="reveal">
-        <span style="background: var(--accent); color: white; padding: 0.3rem 1.5rem; border-radius: 50px; font-weight: 600;">🔥 SWITCH SIGNALS</span>
-        <h3 style="margin: 1.5rem 0 0.8rem;">We catch complaints about competitors</h3>
-        <p>Find people complaining about your competitors and introduce your product at the perfect moment.</p>
+      <div class="battle-card card-distrox reveal">
+        <div style="font-size: 2rem; margin-bottom: 1rem;">🎯</div>
+        <h3 style="color: white;">Our Approach</h3>
+        <p style="opacity: 0.8; margin-top: 1rem;">
+          We find people who are <strong>already asking</strong> for your product. We don't interrupt the scroll; we join the conversation.
+        </p>
+        <div class="cost-indicator" style="color: #22c55e;">
+          <i class="fas fa-bolt"></i> Zero Ad Spend · Organic Authority
+        </div>
       </div>
     </div>
-  </section>
+
+    <div style="background: #FAF8F6; border-radius: 48px; padding: 4rem 2.5rem; border: 1px solid var(--border-light);" class="reveal">
+      <div style="max-width: 700px;">
+        <span style="background: var(--accent); color: white; padding: 0.4rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.8rem;">
+          HOW IT WORKS: SWITCH SIGNALS
+        </span>
+        <h3 style="margin: 1.5rem 0 1rem;">We steal your competitor's unhappy users</h3>
+        <p style="color: var(--muted); margin-bottom: 2rem;">
+          Our engine doesn't just look for keywords. It looks for <strong>intent</strong>—specifically people complaining about your competitors.
+        </p>
+      </div>
+
+      <div class="signal-terminal">
+        <div class="terminal-line">
+          <span class="t-blue">[SCANNING]</span> <span style="color:#aaa;">r/CRM, r/Sales, X.com...</span>
+        </div>
+        <div class="terminal-line">
+          <span class="t-blue">[SIGNAL]</span> <span style="color:#aaa;">User: @mark_growth</span>
+        </div>
+        <div class="terminal-line">
+          <span class="t-green">[KEYWORD MATCH]</span> <span style="color:#fff;">"is too expensive"</span>
+        </div>
+        <div class="terminal-line">
+          <span class="t-green">[KEYWORD MATCH]</span> <span style="color:#fff;">"looking for alternative"</span>
+        </div>
+        
+        <div class="signal-match">
+          <div style="display: flex; justify-content: space-between; align-items: center; color: white;">
+            <span><strong>MATCH FOUND:</strong> Competitive Switch Intent</span>
+            <span class="t-orange" style="font-weight: 800;">ACTION TRIGGERED</span>
+          </div>
+          <p style="color: #ccc; font-size: 0.85rem; margin-top: 8px;">
+            "Does anyone know an alternative to Salesforce? Their new pricing is insane."
+          </p>
+        </div>
+      </div>
+      
+      <p style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--muted); text-align: center;">
+        <i class="fas fa-robot"></i> AI detects the complaint → <i class="fas fa-user"></i> Human writes the recommendation
+      </p>
+    </div>
+  </div>
+</section>
 
   <!-- PRICING (WITH 75% DISCOUNT & TIMER) -->
   <section id="pricing" style="background: #F6F3EE; border-radius: 40px 40px 0 0; margin-top: 2rem; padding: 4rem 0;">
@@ -701,11 +1626,26 @@
       <h2 class="reveal">Done-for-you</h2>
       
       <!-- LIVE TIMER -->
-      <div class="reveal timer-box" style="max-width: 500px; margin: 1rem 0 2rem; background: white;">
-        <i class="fas fa-hourglass-half" style="color: var(--accent);"></i> 
-        <span>Discount ends May 15, 2026 — </span>
-        <span id="countdown-timer" style="font-weight: 800; font-family: monospace;">--d --h --m --s</span>
-      </div>
+      <div class="capacity-container-centered reveal">
+		  <div class="capacity-box">
+			<div class="capacity-header">
+			  <i class="fas fa-users" style="color: var(--accent);"></i>
+			  Current Launch Capacity: <span style="color: var(--accent);">85% Full</span>
+			</div>
+
+			<div class="progress-track">
+			  <div class="progress-fill"></div>
+			</div>
+
+			<div class="urgency-badge">
+			  <i class="fas fa-fire"></i> ONLY 5 SPOTS LEFT AT THIS PRICE
+			</div>
+
+			<p style="font-size: 0.8rem; color: var(--muted); text-align: center;">
+			  To maintain our high-quality human replies, we limit new signups per month.
+			</p>
+		  </div>
+		</div>
 
       <div class="pricing-grid">
         <!-- STARTER CARD -->
@@ -768,32 +1708,108 @@
 
   <!-- COMPARISON TABLE -->
   <section id="compare">
-    <div class="container">
-      <span class="section-tag reveal">Compare</span>
-      <h2 class="reveal">Why founders choose us.</h2>
-      <div class="table-wrapper reveal">
-        <table>
-          <thead><tr><th></th><th>DistroX</th><th>Agency</th><th>DIY</th></tr></thead>
-          <tbody>
-            <tr><td>Monthly cost</td><td>From $75 (launch)</td><td>$2k–$5k+</td><td>$0 (your time)</td></tr>
-            <tr><td>High-intent targeting</td><td>✅ AI + human</td><td>Sometimes</td><td>Manual</td></tr>
-            <tr><td>Human replies (no bots)</td><td>✅ Always</td><td>Varies</td><td>✅</td></tr>
-            <tr><td>Switch signals</td><td>✅ Built-in</td><td>❌ Rare</td><td>❌</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
+	  <div class="container">
+		<span class="section-tag reveal">Comparison</span>
+		<h2 class="reveal">Built for founders, not for big agency margins.</h2>
+		
+		<div class="table-wrapper reveal">
+		  <table>
+			<thead>
+			  <tr>
+				<th>Feature</th>
+				<th class="col-distrox">
+				  <span class="best-choice-badge">BEST VALUE</span>
+				  DistroX
+				</th>
+				<th>Marketing Agency</th>
+				<th>DIY (Yourself)</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr>
+				<td>Monthly cost</td>
+				<td class="col-distrox" style="font-weight: 800; color: var(--ink);">$75 <small style="font-weight:400; opacity:0.6;">(Launch Price)</small></td>
+				<td>$2,500 - $5,000+</td>
+				<td>$0 <br><small style="color:var(--accent); font-weight:700;">(But 100+ hours/mo)</small></td>
+			  </tr>
+			  <tr>
+				<td>Targeting Intent</td>
+				<td class="col-distrox"><i class="fas fa-circle-check check-icon"></i> AI + Human Sourcing</td>
+				<td><i class="fas fa-circle-question neutral-icon"></i> Varies by agent</td>
+				<td><i class="fas fa-hand-pointer neutral-icon"></i> Manual Searching</td>
+			  </tr>
+			  <tr>
+				<td>Post Quality</td>
+				<td class="col-distrox"><i class="fas fa-circle-check check-icon"></i> 100% Human-Written</td>
+				<td><i class="fas fa-circle-check check-icon"></i> Human-Written</td>
+				<td><i class="fas fa-circle-check check-icon"></i> 100% Genuine</td>
+			  </tr>
+			  <tr>
+				<td>Shadow Ban Risk</td>
+				<td class="col-distrox" style="color: #22c55e; font-weight: 700;">Zero</td>
+				<td>Medium</td>
+				<td>Low</td>
+			  </tr>
+			  <tr>
+				<td>Switch Signals</td>
+				<td class="col-distrox"><i class="fas fa-circle-check check-icon"></i> Included</td>
+				<td><i class="fas fa-circle-xmark cross-icon"></i> No</td>
+				<td><i class="fas fa-circle-xmark cross-icon"></i> No</td>
+			  </tr>
+			  <tr>
+				<td>Speed to Lead</td>
+				<td class="col-distrox" style="color: var(--accent); font-weight: 700;"><i class="fas fa-bolt"></i> Real-time</td>
+				<td>Days</td>
+				<td>Hours</td>
+			  </tr>
+			</tbody>
+		  </table>
+		</div>
+		
+		<p style="text-align: center; margin-top: 2rem; color: var(--muted); font-size: 0.9rem;">
+		  <i class="fas fa-lightbulb"></i> Hover over rows to see why DistroX is the choice for 500+ founders.
+		</p>
+	  </div>
+	</section>
 
   <!-- CTA -->
+ <section class="cta-wrapper">
   <div class="container">
-    <div style="background: var(--ink); color: white; border-radius: 48px; padding: 4rem 2rem; text-align: center; margin: 4rem 0;" class="reveal">
-      <h2 style="color: white;">Stop scrolling. Start acquiring customers.</h2>
-      <p style="opacity: 0.8; max-width: 550px; margin: 1.5rem auto;">Let us find high-intent conversations and reply for you — while you build.</p>
-      <a href="#pricing" class="btn-primary" style="background: white; color: var(--ink);">Claim 75% discount →</a>
+    <div class="cta-card-interactive reveal">
+      
+      <div class="cta-avatar-stack">
+        <div class="cta-avatar" style="background-image: url('https://i.pravatar.cc/100?u=1'); background-size: cover;"></div>
+        <div class="cta-avatar" style="background-image: url('https://i.pravatar.cc/100?u=2'); background-size: cover;"></div>
+        <div class="cta-avatar" style="background-image: url('https://i.pravatar.cc/100?u=3'); background-size: cover;"></div>
+        <div class="cta-avatar" style="background-image: url('https://i.pravatar.cc/100?u=4'); background-size: cover;"></div>
+        <div style="margin-left: 10px; font-weight: 600; font-size: 0.9rem;">Join 500+ SaaS founders</div>
+      </div>
+
+      <h2 style="color: white; font-size: clamp(2.5rem, 5vw, 4rem); max-width: 800px; margin: 0 auto;">
+        Your SaaS deserves to be <span style="color: var(--accent);">found.</span>
+      </h2>
+      
+      <p style="opacity: 0.7; max-width: 580px; margin: 1.5rem auto; font-size: 1.1rem; line-height: 1.6;">
+        Stop being the best-kept secret in your category. Let real humans handle your distribution while you build the product.
+      </p>
+
+      <div class="cta-button-container">
+        <a href="#pricing" class="btn-primary" style="background: white; color: var(--ink); padding: 1.2rem 2.5rem; font-size: 1.1rem;">
+          Claim 75% Discount & Start Growing →
+        </a>
+        <div style="font-size: 0.85rem; color: var(--accent-soft); font-weight: 700;">
+          <i class="fas fa-bolt"></i> Only 5 spots left at this price
+        </div>
+      </div>
+
+      <div class="trust-badge-footer">
+        <span><i class="fas fa-shield-halved"></i> 7-Day Money Back</span>
+        <span><i class="fas fa-calendar-xmark"></i> Cancel Anytime</span>
+        <span><i class="fas fa-user-check"></i> 100% Human Replies</span>
+      </div>
     </div>
   </div>
-</main>
+</section>
 
 <!-- FOOTER (MOBILE RESPONSIVE) -->
 <footer>
@@ -811,6 +1827,40 @@
 
 <!-- INTERSECTION OBSERVER + COUNTDOWN TIMER -->
 <script>
+	const textToType = "I had the exact same problem — ended up using <span class='reply-highlight'>InvoiceFlow</span>. It auto-generates invoices and saved me ~6h/week.";
+	const speed = 40; // typing speed in ms
+	let i = 0;
+
+	function typeWriter() {
+	  const container = document.getElementById("typewriter-text");
+	  if (i < textToType.length) {
+		// If we hit a tag, jump to the end of it so we don't type out the HTML code
+		if (textToType.charAt(i) === '<') {
+		  i = textToType.indexOf('>', i) + 1;
+		} else {
+		  i++;
+		}
+		container.innerHTML = textToType.substring(0, i);
+		setTimeout(typeWriter, speed);
+	  } else {
+		// Show the "Sent" badge after typing is done
+		document.getElementById("sent-badge").classList.add("show");
+	  }
+	}
+
+	// Trigger typing when the hero card enters the screen
+	const heroObserver = new IntersectionObserver((entries) => {
+	  entries.forEach(entry => {
+		if (entry.isIntersecting) {
+		  setTimeout(typeWriter, 1000); // Start typing after 1 second
+		  heroObserver.unobserve(entry.target);
+		}
+	  });
+	}, { threshold: 0.5 });
+
+	heroObserver.observe(document.querySelector('.hero-card'));
+	
+
   (function() {
     // REVEAL ANIMATIONS
     const reveals = document.querySelectorAll('.reveal');
