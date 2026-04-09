@@ -519,6 +519,34 @@
       opacity: 1;
       transform: translateY(0);
     }
+	
+	/* Add this to your CSS */
+	section {
+	  padding: 35px 0; /* Creates 100px space at top and bottom of every section */
+	}
+
+	#example {
+	  padding-top: 0; /* We can reduce this if the section above already has bottom padding */
+	}
+
+	.container {
+	  margin-bottom: 2rem; /* Adds a bit of extra space after every container */
+	}
+	
+	a {
+	  text-decoration: none; /* Removes the underline */
+	  color: inherit;       /* Makes the link take the color of the text around it */
+	}
+	.nav-links a {
+	  font-size: 0.9rem;
+	  font-weight: 500;
+	  color: var(--muted); /* Uses that grey color you defined */
+	  transition: color 0.2s ease;
+	}
+
+	.nav-links a:hover {
+	  color: var(--ink); /* Turns black when you hover over it */
+	}
   </style>
 </head>
 <body>
@@ -545,11 +573,10 @@
           <span>Trusted by 500+ SaaS founders</span>
         </div>
         <h1>
-          We turn Reddit & X conversations into <span class="highlight">customers</span> for your SaaS
+          Turn Reddit & X conversations into your <span class="highlight">customers</span> on auto-pilot.
         </h1>
         <p class="hero-desc">
-          We find high-intent posts where people are actively looking for solutions, 
-          then write human replies that naturally recommend your product.
+          We monitor Reddit and X 24/7, find conversations where people ask for solutions like yours, and publish authentic replies that drive traffic to your product.
         </p>
         <div class="hero-actions">
           <a href="#pricing" class="btn-primary"><i class="fas fa-arrow-right"></i> Start getting customers</a>
@@ -654,7 +681,7 @@
         </div>
         <div class="card-good reveal">
           <h3><i class="fas fa-comments"></i> Our approach</h3>
-          <p style="margin-top: 1rem;">We insert your product into existing conversations where people <strong>already ask for a solution</strong> — zero ad spend.</p>
+          <p style="margin-top: 1rem;">We insert your product into existing conversations where people <strong>already ask for a solution</strong>, zero ad spend.</p>
         </div>
       </div>
 
@@ -671,7 +698,7 @@
   <section id="pricing" style="background: #F6F3EE; border-radius: 40px 40px 0 0; margin-top: 2rem; padding: 4rem 0;">
     <div class="container">
       <span class="section-tag reveal">Pricing</span>
-      <h2 class="reveal">Done-for-you customer acquisition — 75% off launch special</h2>
+      <h2 class="reveal">Done-for-you</h2>
       
       <!-- LIVE TIMER -->
       <div class="reveal timer-box" style="max-width: 500px; margin: 1rem 0 2rem; background: white;">
@@ -721,7 +748,7 @@
         <div class="pricing-card reveal">
           <span class="discount-badge">75% OFF</span>
           <h3>Scale</h3>
-          <div class="price">$325 <s>$1,299</s></div>
+          <div class="price">Custom</div>
           <p class="muted" style="margin-bottom: 1.2rem;">Agency / high-volume</p>
           <ul class="feature-list">
             <li><i class="fas fa-check" style="color: var(--accent);"></i> <strong>Unlimited replies</strong></li>
